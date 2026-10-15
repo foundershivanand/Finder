@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, Compass, Download, Filter, Flame, Layers, Search, Sparkles, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
+import { AppFooter } from "@/components/app-footer";
 import { AppHeader } from "@/components/app-header";
 import { PlatformIcon } from "@/components/platform-icons";
 import { HitCard, ProductCard } from "@/components/product-card";
@@ -316,6 +317,7 @@ function Home() {
           <HitGrid hits={filteredHits} empty={emptyCopy(desk)} />
         )}
       </main>
+      <AppFooter />
     </div>
   );
 }

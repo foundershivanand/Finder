@@ -8,6 +8,7 @@ import { fromTrustProfile } from "./profile";
 import { loadRedditFeed, loadRedditProfile } from "./reddit.server";
 import { fetchWebsiteText, gatherReviews, reviewsFromWebsite } from "./reviews.server";
 import { loadScoutFeed, loadStartupProfile } from "./trustmrr.server";
+import { pushIdeaToProjectHub, type PushToHubInput, type PushToHubResult } from "./project-hub.server";
 import type { DeskKind, GenerateResult, ProductDossier, RiposteBrief, ScoutHit } from "./types";
 import { generateRiposteBrief } from "./xai.server";
 
@@ -140,3 +141,29 @@ export const generateBrief = createServerFn({ method: "GET" })
       return { ok: false, error: message, profile: null };
     }
   });
+
+export const pushToProjectManage = createServerFn({ method: "POST" })
+  .validator((input: unknown): PushToHubInput => {
+    if (!input || typeof input !== "object") {
+      throw new Error("Invalid payload");
+    }
+    const r = input as Record<string, unknown>;
+    return {
+      id: typeof r.id === "string" ? r.id : undefined,
+      name: typeof r.name === "string" ? r.name : "Untitled Idea",
+      description: typeof r.description === "string" ? r.description : "",
+      url: typeof r.url === "string" ? r.url : undefined,
+      tag: typeof r.tag === "string" ? r.tag : undefined,
+      status: typeof r.status === "string" ? r.status : undefined,
+      source: typeof r.source === "string" ? r.source : undefined,
+      sourceUrl: typeof r.sourceUrl === "string" ? r.sourceUrl : undefined,
+      thesis: typeof r.thesis === "string" ? r.thesis : undefined,
+      betterName: typeof r.betterName === "string" ? r.betterName : undefined,
+      blueprint: typeof r.blueprint === "string" ? r.blueprint : undefined,
+      vibeGuide: Array.isArray(r.vibeGuide) ? (r.vibeGuide as PushToHubInput["vibeGuide"]) : undefined,
+    };
+  })
+  .handler(async ({ data }): Promise<PushToHubResult> => {
+    return pushIdeaToProjectHub(data);
+  });
+

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Bookmark, BookmarkCheck, Download, ExternalLink, ListOrdered, LoaderCircle, RefreshCw, Sparkles } from "lucide-react";
+import { ArrowLeft, Bookmark, BookmarkCheck, Check, Download, ExternalLink, FolderKanban, ListOrdered, LoaderCircle, RefreshCw, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
+import { AppFooter } from "@/components/app-footer";
 import { AppHeader } from "@/components/app-header";
 import { BriefView, CopyButton, PlanSections } from "@/components/brief-view";
 import { PlatformIcon } from "@/components/platform-icons";
@@ -10,6 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { formatCount, formatGrowth, formatRating, formatUsd, initials, isDeskKind, isSafeHitId } from "@/lib/format";
 import { generateBrief, fetchDossier } from "@/lib/server-fns";
 import { getSavedBrief, removeBrief, saveBrief } from "@/lib/saved-briefs";
+import { pushIdeaToProjectManage, mapOpportunityTag } from "@/lib/project-manage";
 import type { ProductDossier, RiposteBrief, TargetProfile } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -55,6 +57,7 @@ function HitPage() {
   const [saved, setSaved] = useState(false);
   const [iconBroken, setIconBroken] = useState(false);
   const [warning, setWarning] = useState<string | null>(null);
+  const [pushed, setPushed] = useState(false);
 
   useEffect(() => {
     const existing = getSavedBrief(dossier.brief.slug);
@@ -176,6 +179,28 @@ function HitPage() {
     URL.revokeObjectURL(url);
   }
 
+  function handlePushToProjectManage() {
+    setPushed(true);
+    setTimeout(() => setPushed(false), 2500);
+    pushIdeaToProjectManage({
+      name: brief.opportunity.betterName || profile.name,
+      description: brief.thesis || brief.opportunity.positioning || profile.description || "",
+      url: profile.website || profile.sourceUrl || window.location.href,
+      tag: mapOpportunityTag(profile.kind, profile.category),
+      status: "idea",
+      source: `Finder (${profile.kind})`,
+      sourceUrl: window.location.href,
+      blueprint: brief.masterBlueprint ?? undefined,
+      vibeGuide: brief.vibeGuide?.map((s) => ({
+        step: s.step,
+        title: s.title,
+        why: s.why,
+        prompt: s.prompt,
+        doneWhen: s.doneWhen,
+      })),
+    });
+  }
+
   return (
     <div className="min-h-dvh bg-background pb-32">
       <AppHeader />
@@ -203,6 +228,16 @@ function HitPage() {
               </h2>
             </div>
             <div className="hidden flex-wrap items-center gap-2 sm:flex">
+              <Button
+                type="button"
+                size="sm"
+                onClick={handlePushToProjectManage}
+                className="h-9 px-3.5 text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-950/40 transition-all hover:scale-[1.02]"
+                title="Push this idea into Project Manage to track tasks and build"
+              >
+                {pushed ? <Check className="size-3.5 mr-1.5 text-emerald-200" /> : <FolderKanban className="size-3.5 mr-1.5" />}
+                <span>{pushed ? "Pushed to Project Manage!" : "Push to Project Manage"}</span>
+              </Button>
               {planReady ? (
                 <>
                   <Button
@@ -265,9 +300,21 @@ function HitPage() {
         </section>
       </main>
 
+      <AppFooter />
+
       {/* Mobile Sticky Action Bar */}
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-card/95 backdrop-blur-xl sm:hidden">
         <div className="mx-auto flex max-w-3xl items-center gap-2 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+          <Button
+            type="button"
+            size="sm"
+            onClick={handlePushToProjectManage}
+            className="h-10 px-3 bg-emerald-700 hover:bg-emerald-600 text-white font-semibold text-xs shrink-0"
+            title="Push to Project Manage"
+          >
+            {pushed ? <Check className="size-4 mr-1 text-emerald-200" /> : <FolderKanban className="size-4 mr-1" />}
+            <span>{pushed ? "Pushed" : "Build"}</span>
+          </Button>
           {planReady ? (
             <Button type="button" variant="outline" size="sm" className="h-10 px-3 border-border" onClick={toggleSave}>
               {saved ? <BookmarkCheck className="size-4 text-emerald-400" /> : <Bookmark className="size-4" />}

@@ -1,7 +1,8 @@
-import { Check, Copy, Download, FileCode, Layers, ShieldCheck, Sparkles, Terminal } from "lucide-react";
+import { Check, Copy, Download, ExternalLink, FileCode, FolderKanban, Layers, ShieldCheck, Sparkles, Terminal } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { pushIdeaToProjectManage } from "@/lib/project-manage";
 import type { Complaint, DeskKind, RiposteBrief, ReviewSnippet, VibeStep } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +19,7 @@ export function BriefView({
 }) {
   const isAskDesk = kind === "reddit" || kind === "twitter" || kind === "hackernews";
   const isStore = kind === "appstore" || kind === "playstore";
+  const [pushed, setPushed] = useState(false);
 
   return (
     <div className="flex flex-col gap-10">
@@ -110,6 +112,7 @@ export function BriefView({
 }
 
 export function PlanSections({ brief }: { brief: RiposteBrief }) {
+  const [pushed, setPushed] = useState(false);
   function downloadMarkdown() {
     const content = serializeFullMarkdown(brief);
     const blob = new Blob([content], { type: "text/markdown;charset=utf-8" });
@@ -247,6 +250,54 @@ export function PlanSections({ brief }: { brief: RiposteBrief }) {
           <Field label="First 100 Users Channel" value={brief.launch.firstUsers} />
           <Field label="Monetization & Pricing" value={brief.launch.pricing} />
           <Field label="The Moat / Differentiator" value={brief.launch.differentiator} />
+        </div>
+      </section>
+
+      {/* Push to Project Manage Action Box */}
+      <section className="rounded-3xl border border-emerald-500/40 bg-gradient-to-br from-emerald-950/40 via-card to-background p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+        <div className="pointer-events-none absolute right-0 top-0 size-64 rounded-full bg-emerald-500/10 blur-3xl" />
+        <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+              <Kicker>Ready to Build This Idea?</Kicker>
+            </div>
+            <h3 className="mt-2 text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+              Push {brief.opportunity.betterName} to Project Manage
+            </h3>
+            <p className="mt-1.5 text-xs sm:text-sm text-muted max-w-xl">
+              Track this project through Idea, Working, Done, and Deployed stages with the 817-task Master Launch Checklist and your sequenced vibe prompts.
+            </p>
+          </div>
+          <Button
+            type="button"
+            onClick={() => {
+              setPushed(true);
+              setTimeout(() => setPushed(false), 3000);
+              pushIdeaToProjectManage({
+                name: brief.opportunity.betterName || brief.productName,
+                description: brief.thesis || brief.opportunity.positioning || "",
+                url: typeof window !== "undefined" ? window.location.href : undefined,
+                tag: "saas",
+                status: "idea",
+                source: "Finder Vibe Blueprint",
+                sourceUrl: typeof window !== "undefined" ? window.location.href : undefined,
+                blueprint: brief.masterBlueprint ?? undefined,
+                vibeGuide: brief.vibeGuide?.map((s) => ({
+                  step: s.step,
+                  title: s.title,
+                  why: s.why,
+                  prompt: s.prompt,
+                  doneWhen: s.doneWhen,
+                })),
+              });
+            }}
+            className="h-11 px-6 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-emerald-950/50 shrink-0 inline-flex items-center gap-2 transition-all hover:scale-[1.02]"
+          >
+            {pushed ? <Check className="size-4 text-emerald-200" /> : <FolderKanban className="size-4" />}
+            <span>{pushed ? "Pushed to Project Manage!" : "Push to Project Manage"}</span>
+            <ExternalLink className="size-3.5 opacity-80" />
+          </Button>
         </div>
       </section>
     </div>

@@ -1,11 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Bookmark, Compass, Download, ExternalLink, Sparkles, Trash2 } from "lucide-react";
+import { ArrowLeft, Bookmark, Compass, Download, ExternalLink, FolderKanban, Sparkles, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { AppFooter } from "@/components/app-footer";
 import { AppHeader } from "@/components/app-header";
 import { PlatformIcon } from "@/components/platform-icons";
 import { Button } from "@/components/ui/button";
 import { formatUsd, parseHitKey } from "@/lib/format";
 import { listSavedBriefs, removeBrief, type SavedBrief } from "@/lib/saved-briefs";
+import { pushIdeaToProjectManage, mapOpportunityTag } from "@/lib/project-manage";
 
 export const Route = createFileRoute("/saved")({
   component: SavedPage,
@@ -73,6 +75,23 @@ function SavedPage() {
           ) : null}
         </div>
 
+        {/* Product Hub Companion Banner */}
+        <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 text-xs shadow-lg">
+          <div className="flex items-center gap-2.5">
+            <FolderKanban className="size-4 text-emerald-400 shrink-0" />
+            <span className="text-foreground">
+              Ready to execute these blueprints? Track tasks and launch stages in{" "}
+              <strong className="text-emerald-300">Product Hub</strong> (817-task Master Launch OS).
+            </span>
+          </div>
+          <Button asChild size="sm" variant="outline" className="h-8 text-xs shrink-0 border-emerald-500/40 text-emerald-300 hover:bg-emerald-900/40 hover:text-white">
+            <a href="https://project-manage-z6u.pages.dev/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5">
+              <span>Open in Product Hub</span>
+              <ExternalLink className="size-3" />
+            </a>
+          </Button>
+        </div>
+
         {items.length === 0 ? (
           <div className="mt-10 rounded-2xl bg-card border border-border/80 p-12 text-center shadow-lg">
             <div className="mx-auto size-12 rounded-2xl bg-card-2 border border-border/70 flex items-center justify-center text-muted">
@@ -126,7 +145,36 @@ function SavedPage() {
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
-                      <Button asChild size="sm" className="h-9 px-4 text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white">
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline"
+                        onClick={() => {
+                          pushIdeaToProjectManage({
+                            name: item.brief.opportunity.betterName || item.brief.productName,
+                            description: item.brief.thesis || item.brief.opportunity.positioning || "",
+                            url: item.profile.website || `https://finder-d17.pages.dev/hit/${kind}/${id}`,
+                            tag: mapOpportunityTag(kind, item.profile.category),
+                            status: "idea",
+                            source: `Finder (${kind})`,
+                            sourceUrl: `https://finder-d17.pages.dev/hit/${kind}/${id}`,
+                            blueprint: item.brief.masterBlueprint ?? undefined,
+                            vibeGuide: item.brief.vibeGuide?.map((s) => ({
+                              step: s.step,
+                              title: s.title,
+                              why: s.why,
+                              prompt: s.prompt,
+                              doneWhen: s.doneWhen,
+                            })),
+                          });
+                        }}
+                        className="h-9 px-3 text-xs border-emerald-500/40 bg-emerald-950/30 text-emerald-300 hover:bg-emerald-900/50 hover:text-white"
+                        title="Push to Project Manage"
+                      >
+                        <FolderKanban className="size-3.5 mr-1 text-emerald-400" />
+                        <span>Push to Project</span>
+                      </Button>
+                      <Button asChild size="sm" className="h-9 px-3.5 text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white">
                         <Link to="/hit/$kind/$id" params={{ kind, id }}>
                           <span>Open Plan</span>
                           <Sparkles className="size-3 ml-1.5" />
@@ -150,6 +198,7 @@ function SavedPage() {
           </ul>
         )}
       </main>
+      <AppFooter />
     </div>
   );
 }

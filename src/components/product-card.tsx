@@ -1,10 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Sparkles, Star, TrendingUp } from "lucide-react";
+import { ArrowUpRight, Check, FolderKanban, Sparkles, Star, TrendingUp } from "lucide-react";
 import { useState } from "react";
 import { PlatformIcon } from "@/components/platform-icons";
 import { Badge } from "@/components/ui/badge";
 import { formatGrowth, formatUsd, initials } from "@/lib/format";
+import { pushIdeaToProjectManage, mapOpportunityTag } from "@/lib/project-manage";
 import type { ScoutHit, ScoutProduct } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 export function ProductCard({ product }: { product: ScoutProduct }) {
   const growth = formatGrowth(product.growth30d);
@@ -38,6 +40,7 @@ export function ProductCard({ product }: { product: ScoutProduct }) {
 
 export function HitCard({ hit, moneyTone }: { hit: ScoutHit; moneyTone?: boolean }) {
   const [broken, setBroken] = useState(false);
+  const [pushed, setPushed] = useState(false);
 
   // Distinguish pain point vs ask vs description
   const isAsk = hit.kind === "reddit" || hit.kind === "twitter" || hit.kind === "hackernews";
@@ -132,6 +135,34 @@ export function HitCard({ hit, moneyTone }: { hit: ScoutHit; moneyTone?: boolean
               {b}
             </Badge>
           ))}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setPushed(true);
+              setTimeout(() => setPushed(false), 2500);
+              pushIdeaToProjectManage({
+                name: hit.name,
+                description: hit.description,
+                url: hit.sourceUrl || `https://finder-d17.pages.dev/hit/${hit.kind}/${hit.id}`,
+                tag: mapOpportunityTag(hit.kind, hit.category),
+                status: "idea",
+                source: `Finder (${hit.kind})`,
+                sourceUrl: `https://finder-d17.pages.dev/hit/${hit.kind}/${hit.id}`,
+              });
+            }}
+            className={cn(
+              "text-[10px] font-medium border rounded-md px-1.5 py-0.5 inline-flex items-center gap-1 transition-all z-10",
+              pushed
+                ? "text-emerald-200 bg-emerald-800/80 border-emerald-400"
+                : "text-emerald-300 hover:text-white bg-emerald-950/40 hover:bg-emerald-900/60 border-emerald-500/30"
+            )}
+            title="Push to Project Manage"
+          >
+            {pushed ? <Check className="size-2.5 text-emerald-300" /> : <FolderKanban className="size-2.5" />}
+            <span>{pushed ? "Pushed" : "Push"}</span>
+          </button>
           <span className="text-[11px] font-medium text-emerald-400 inline-flex items-center gap-0.5 opacity-90 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all ml-1">
             Build
             <Sparkles className="size-3" />

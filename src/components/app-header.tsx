@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Bookmark, Compass, Sparkles } from "lucide-react";
+import { Bookmark, Compass, ExternalLink, FolderKanban, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { PwaInstallButton } from "@/components/pwa-install";
 import { listSavedBriefs } from "@/lib/saved-briefs";
@@ -66,6 +66,18 @@ export function AppHeader({ className }: { className?: string }) {
               </span>
             ) : null}
           </Link>
+
+          <a
+            href="https://project-manage-z6u.pages.dev/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-9 items-center gap-1.5 px-2.5 sm:px-3 text-xs font-medium text-emerald-400 bg-emerald-950/30 border border-emerald-500/30 rounded-lg hover:bg-emerald-900/40 hover:border-emerald-500/50 hover:text-emerald-300 transition-colors"
+            title="Product Hub — 96 Projects & Master Launch OS"
+          >
+            <FolderKanban className="size-3.5 text-emerald-400" />
+            <span className="hidden sm:inline">Product Hub</span>
+            <ExternalLink className="size-3 text-emerald-400/70" />
+          </a>
 
           {/* Dedicated Homescreen Install CTA */}
           <PwaInstallButton />
