@@ -48,12 +48,19 @@ export function HitCard({ hit, moneyTone }: { hit: ScoutHit; moneyTone?: boolean
   const painLabel = isAsk ? "Unmet Request" : isStore ? "1-Star Opportunity" : "Market Flank";
 
   return (
-    <Link
-      to="/hit/$kind/$id"
-      params={{ kind: hit.kind, id: hit.id }}
+    <div
       className="group relative flex flex-col justify-between rounded-2xl bg-card/90 border border-border/80 p-5 transition-all duration-200 ease-out hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-card-2 hover:shadow-[0_12px_36px_-10px_rgba(0,0,0,0.8),0_0_20px_rgba(16,185,129,0.06)]"
     >
-      <div>
+      {/* Clickable Card Overlay */}
+      <Link
+        to="/hit/$kind/$id"
+        params={{ kind: hit.kind, id: hit.id }}
+        className="absolute inset-0 z-0 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+        aria-label={`View ${hit.name} analysis`}
+      />
+
+      {/* Card Content */}
+      <div className="relative pointer-events-none z-[1]">
         {/* Top Header: Platform Tag + Title + Arrow */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2.5 min-w-0">
@@ -115,7 +122,7 @@ export function HitCard({ hit, moneyTone }: { hit: ScoutHit; moneyTone?: boolean
       </div>
 
       {/* Card Footer: Metrics & Action */}
-      <div className="mt-4 pt-3.5 border-t border-border/70 flex flex-wrap items-center justify-between gap-2.5">
+      <div className="mt-4 pt-3.5 border-t border-border/70 flex flex-wrap items-center justify-between gap-2.5 relative z-10 pointer-events-auto">
         <div className="flex items-center gap-3">
           {hit.stats.slice(0, 2).map((s) => (
             <div key={s.label}>
@@ -153,7 +160,7 @@ export function HitCard({ hit, moneyTone }: { hit: ScoutHit; moneyTone?: boolean
               });
             }}
             className={cn(
-              "text-[10px] font-medium border rounded-md px-1.5 py-0.5 inline-flex items-center gap-1 transition-all z-10",
+              "text-[10px] font-medium border rounded-md px-1.5 py-0.5 inline-flex items-center gap-1 transition-all",
               pushed
                 ? "text-emerald-200 bg-emerald-800/80 border-emerald-400"
                 : "text-emerald-300 hover:text-white bg-emerald-950/40 hover:bg-emerald-900/60 border-emerald-500/30"
@@ -169,7 +176,7 @@ export function HitCard({ hit, moneyTone }: { hit: ScoutHit; moneyTone?: boolean
           </span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 
