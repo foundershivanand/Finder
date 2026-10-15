@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "include": [
+    "/*"
+  ],
+  "exclude": [
+    "/apple-touch-icon.png",
+    "/favicon.svg",
+    "/icon-192.png",
+    "/icon-512.png",
+    "/icon-maskable.png",
+    "/manifest.json",
+    "/manifest.webmanifest",
+    "/og.jpg",
+    "/sw.js",
+    "/__grok/icon-180.png",
+    "/assets/app-header-BNp7Hc2J.js",
+    "/assets/arrow-left-B1RWIxOP.js",
+    "/assets/badge-D4WAyvhf.js",
+    "/assets/hit._kind._id-C8DSs4Vk.js",
+    "/assets/hit._kind._id-DqDL_t84.js",
+    "/assets/index-4sBAwmGy.js",
+    "/assets/link-Cy4_nfhh.js",
+    "/assets/platform-icons-rGkJdDz9.js",
+    "/assets/preload-helper-kPToYM-v.js",
+    "/assets/routes-CbLLXIQq.js",
+    "/assets/routes-DYAbas77.js",
+    "/assets/saved-CWGjbWwx.js",
+    "/assets/server-fns-CaCTwadw.js",
+    "/assets/startup._slug-_uAtv36q.js",
+    "/assets/styles-BRewg68A.css",
+    "/__grok/install/styles.css",
+    "/__grok/install/assets/homescreen/glass-puzzle.svg",
+    "/__grok/install/assets/homescreen/glass-share.svg",
+    "/__grok/install/assets/homescreen/logo-grok.svg",
+    "/__grok/install/assets/homescreen/ob-ipad.png",
+    "/__grok/install/assets/homescreen/ob-phone.png",
+    "/__grok/install/assets/homescreen/plus.svg"
+  ]
+}

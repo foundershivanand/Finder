@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Finder — Startup & App Ideas",
+      "hasCanvas": false,
+      "bodyTextLen": 10833,
+      "bodyTextHash": "a3989bed798aee91f7ea98717287f6fba8c1fcdd2d400770afca58b948c44ce1",
+      "bodyTextPrefix": "Finder Discover Saved Plans Install App PWA TRUSTMRR DESK Live f",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/home/shiva/finder/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Finder — Startup & App Ideas",
+      "hasCanvas": false,
+      "bodyTextLen": 10125,
+      "bodyTextHash": "c67ef14a72a086babcf62132f3a7a7d9d3579c2698cc1ead92e56d07bc2d3598",
+      "bodyTextPrefix": "Finder Saved Plans Install App TRUSTMRR DESK Live from TrustMRR ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/home/shiva/finder/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [
+    "BRAND NOTE: no custom public/og.jpg — the platform will serve the og.grok.me placeholder. Custom cards are the default for games of every kind (DOM board/word games included), whimsical apps, creative tools, and brand-forward pages — only plain utilities (converters, CRUD trackers, admin dashboards) keep the placeholder. If this app is not a plain utility, finish the brand-asset pass per /workspace/.grok/skills/og/SKILL.md."
+  ],
+  "authWarnings": [],
+  "verdictFile": "/home/shiva/finder/screenshots/app-builder-preview.json"
+}

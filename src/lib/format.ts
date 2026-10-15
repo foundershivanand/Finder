@@ -1,0 +1,151 @@
+import type { DeskKind } from "./types";
+
+export function formatUsd(value: number | null | undefined): string {
+  if (value == null || Number.isNaN(value)) return "—";
+  const abs = Math.abs(value);
+  const sign = value < 0 ? "-" : "";
+  if (abs >= 1_000_000) return `${sign}$${trimNum(abs / 1_000_000)}M`;
+  if (abs >= 10_000) return `${sign}$${trimNum(abs / 1_000)}k`;
+  if (abs >= 1_000) return `${sign}$${trimNum(abs / 1_000)}k`;
+  if (abs >= 100) return `${sign}$${Math.round(abs)}`;
+  if (abs >= 1) return `${sign}$${abs.toFixed(abs < 10 ? 2 : 0)}`;
+  if (abs === 0) return "$0";
+  return `${sign}$${abs.toFixed(2)}`;
+}
+
+function trimNum(n: number): string {
+  const rounded = n >= 100 ? Math.round(n) : Math.round(n * 10) / 10;
+  return String(rounded).replace(/\.0$/, "");
+}
+
+export function formatCount(value: number | null | undefined): string {
+  if (value == null || !Number.isFinite(value) || value < 0) return "—";
+  if (value >= 1_000_000) return `${trimNum(value / 1_000_000)}M`;
+  if (value >= 1_000) return `${trimNum(value / 1_000)}k`;
+  return String(Math.round(value));
+}
+
+export function formatRating(value: number | null | undefined): string {
+  if (value == null || !Number.isFinite(value)) return "—";
+  return value.toFixed(1);
+}
+
+export function formatGrowth(pct: number | null | undefined): string | null {
+  if (pct == null || !Number.isFinite(pct) || pct === 0) return null;
+  if (Math.abs(pct) >= 1000) {
+    const multiple = pct / 100;
+    if (multiple >= 100) return `×${Math.round(multiple)}`;
+    return `×${multiple.toFixed(1).replace(/\.0$/, "")}`;
+  }
+  const rounded = Math.abs(pct) >= 10 ? Math.round(pct) : Math.round(pct * 10) / 10;
+  const body = `${rounded}%`.replace("-", "");
+  return pct > 0 ? `+${body}` : `−${body}`;
+}
+
+export function initials(name: string): string {
+  const parts = name
+    .replace(/[^a-zA-Z0-9 ]/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  if (parts.length === 0) return "R";
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[1][0]).toUpperCase();
+}
+
+export function isSafeSlug(slug: string): boolean {
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) && slug.length <= 80;
+}
+
+export const DESK_KINDS: DeskKind[] = [
+  "trustmrr",
+  "reddit",
+  "appstore",
+  "playstore",
+  "producthunt",
+  "twitter",
+  "hackernews",
+  "github",
+  "betalist",
+  "lobsters",
+  "devto",
+  "firefox",
+  "launchingnext",
+];
+
+export function isDeskKind(value: string): value is DeskKind {
+  return (DESK_KINDS as string[]).includes(value);
+}
+
+export function isSafeHitId(kind: DeskKind, id: string): boolean {
+  if (id.length < 1 || id.length > 180) return false;
+  if (kind === "trustmrr") return isSafeSlug(id.toLowerCase());
+  if (kind === "reddit") return /^[a-z0-9]{5,16}$/i.test(id);
+  if (kind === "appstore") return /^\d{5,14}$/.test(id);
+  if (kind === "playstore") return /^[a-zA-Z][\w]*(\.[a-zA-Z][\w]*)+$/.test(id);
+  if (kind === "twitter" || kind === "hackernews" || kind === "devto") return /^\d{4,22}$/.test(id);
+  if (kind === "github") return /^[A-Za-z0-9._-]+~[A-Za-z0-9._-]+$/.test(id);
+  if (kind === "launchingnext") return /^[a-z0-9-]+~\d+$/i.test(id);
+  if (kind === "lobsters") return /^[a-z0-9]{4,12}$/i.test(id);
+  return /^[a-zA-Z0-9][a-zA-Z0-9._-]{0,179}$/.test(id);
+}
+
+export function hitKey(kind: DeskKind, id: string): string {
+  return `${kind}:${id}`;
+}
+
+export function parseHitKey(slug: string): { kind: DeskKind; id: string } | null {
+  const idx = slug.indexOf(":");
+  if (idx < 1) return null;
+  const kind = slug.slice(0, idx);
+  const id = slug.slice(idx + 1);
+  if (!isDeskKind(kind) || !isSafeHitId(kind, id)) return null;
+  return { kind, id };
+}
+
+export function extractSlug(input: string): string | null {
+  const raw = input.trim();
+  if (!raw) return null;
+  const urlMatch = raw.match(/trustmrr\.com\/startup\/([a-z0-9-]+)/i);
+  if (urlMatch?.[1]) return urlMatch[1].toLowerCase();
+  const slug = raw
+    .toLowerCase()
+    .replace(/^\/+/, "")
+    .replace(/\.md$/, "");
+  if (isSafeSlug(slug)) return slug;
+  return null;
+}
+
+export function extractHitRef(input: string): { kind: DeskKind; id: string } | null {
+  const raw = input.trim();
+  if (!raw) return null;
+  const tmrr = raw.match(/trustmrr\.com\/startup\/([a-z0-9-]+)/i);
+  if (tmrr?.[1] && isSafeSlug(tmrr[1].toLowerCase())) return { kind: "trustmrr", id: tmrr[1].toLowerCase() };
+  const ios = raw.match(/apps\.apple\.com\/[^/]+\/app\/[^/]+\/id(\d+)/i) || raw.match(/itunes\.apple\.com\/.*id(\d+)/i);
+  if (ios?.[1]) return { kind: "appstore", id: ios[1] };
+  const play = raw.match(/play\.google\.com\/store\/apps\/details\?id=([a-zA-Z][\w]*(?:\.[a-zA-Z][\w]*)+)/i);
+  if (play?.[1]) return { kind: "playstore", id: play[1] };
+  const reddit = raw.match(/reddit\.com\/r\/[^/]+\/comments\/([a-z0-9]+)/i);
+  if (reddit?.[1]) return { kind: "reddit", id: reddit[1].toLowerCase() };
+  const ph = raw.match(/producthunt\.com\/(?:products|posts)\/([a-z0-9-]+)/i);
+  if (ph?.[1]) return { kind: "producthunt", id: ph[1].toLowerCase() };
+  const tweet = raw.match(/(?:x\.com|twitter\.com)\/[^/]+\/status\/(\d{15,22})/i);
+  if (tweet?.[1]) return { kind: "twitter", id: tweet[1] };
+  const hn = raw.match(/news\.ycombinator\.com\/item\?id=(\d+)/i);
+  if (hn?.[1]) return { kind: "hackernews", id: hn[1] };
+  const gh = raw.match(/github\.com\/([A-Za-z0-9._-]+)\/([A-Za-z0-9._-]+)/i);
+  if (gh?.[1] && gh[2] && !["topics", "orgs", "settings", "notifications"].includes(gh[1].toLowerCase())) {
+    return { kind: "github", id: `${gh[1]}~${gh[2]}` };
+  }
+  const beta = raw.match(/betalist\.com\/startups\/([a-z0-9-]+)/i);
+  if (beta?.[1]) return { kind: "betalist", id: beta[1].toLowerCase() };
+  const lob = raw.match(/lobste\.rs\/s\/([a-z0-9]+)/i);
+  if (lob?.[1]) return { kind: "lobsters", id: lob[1] };
+  const amo = raw.match(/addons\.mozilla\.org\/[^/]+\/firefox\/addon\/([a-z0-9-]+)/i);
+  if (amo?.[1]) return { kind: "firefox", id: amo[1].toLowerCase() };
+  const ln = raw.match(/launchingnext\.com\/s\/([a-z0-9-]+)\/(\d+)/i);
+  if (ln?.[1] && ln[2]) return { kind: "launchingnext", id: `${ln[1].toLowerCase()}~${ln[2]}` };
+  const slug = extractSlug(raw);
+  if (slug) return { kind: "trustmrr", id: slug };
+  return null;
+}

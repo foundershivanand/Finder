@@ -1,0 +1,1 @@
+import{s as e}from"./link-Cy4_nfhh.js";import{a as t}from"./preload-helper-kPToYM-v.js";import{l as n}from"./index-4sBAwmGy.js";var r=e();function i(){let{slug:e}=n.useParams();return(0,r.jsx)(t,{to:`/hit/$kind/$id`,params:{kind:`trustmrr`,id:e},replace:!0})}export{i as component};
