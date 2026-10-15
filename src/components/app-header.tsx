@@ -20,35 +20,35 @@ export function AppHeader({ className }: { className?: string }) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-30 border-b border-border/80 bg-background/80 backdrop-blur-xl transition-colors",
+        "sticky top-0 z-30 border-b border-white/[0.06] bg-background/75 backdrop-blur-2xl transition-all",
         className
       )}
     >
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
+      <div className="mx-auto flex h-13 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link to="/" className="flex items-center gap-2.5 no-underline group">
-          {/* Minimalist Logo Icon */}
-          <div className="relative size-8 rounded-lg bg-gradient-to-br from-slate-800 to-slate-950 border border-white/10 flex items-center justify-center shadow-inner group-hover:border-emerald-500/40 transition-colors">
-            <svg className="size-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="9" stroke="currentColor" strokeOpacity="0.4" />
-              <polygon points="12,5 16,12 12,19 8,12" fill="currentColor" fillOpacity="0.8" />
-              <circle cx="12" cy="12" r="1.5" fill="#ffffff" />
+          {/* Minimalist Geometric Monogram */}
+          <div className="size-7 rounded-lg bg-zinc-900 border border-white/10 flex items-center justify-center text-zinc-100 group-hover:border-emerald-500/40 group-hover:bg-zinc-800 transition-all">
+            <svg className="size-3.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <circle cx="12" cy="12" r="8" strokeOpacity="0.3" />
+              <path d="M12 4v4m0 8v4M4 12h4m8 0h4" strokeLinecap="round" />
+              <circle cx="12" cy="12" r="1.5" fill="currentColor" />
             </svg>
           </div>
-          <div className="flex items-baseline gap-2">
-            <span className="font-semibold text-base sm:text-lg tracking-tight text-foreground group-hover:text-white transition-colors">
+          <div className="flex items-center gap-2">
+            <span className="font-semibold text-sm sm:text-base tracking-tight text-white group-hover:text-zinc-200 transition-colors">
               Finder
             </span>
-            <span className="hidden xs:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-medium tracking-wide bg-emerald-950/40 text-emerald-400 border border-emerald-800/40">
-              <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              VIBE ENGINE
+            <span className="hidden xs:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono tracking-wide bg-white/[0.04] text-zinc-400 border border-white/[0.06]">
+              <span className="size-1 rounded-full bg-emerald-400" />
+              <span>INTELLIGENCE</span>
             </span>
           </div>
         </Link>
 
-        <nav className="flex items-center gap-2 sm:gap-3">
+        <nav className="flex items-center gap-1.5 sm:gap-2">
           <Link
             to="/"
-            className="hidden sm:inline-flex h-9 items-center gap-1.5 px-3 text-xs font-medium text-muted hover:text-foreground rounded-lg hover:bg-card-2 transition-colors"
+            className="hidden sm:inline-flex h-8 items-center gap-1.5 px-2.5 text-xs font-medium text-zinc-400 hover:text-white rounded-md hover:bg-white/[0.05] transition-colors"
           >
             <Compass className="size-3.5" />
             <span>Discover</span>
@@ -56,12 +56,12 @@ export function AppHeader({ className }: { className?: string }) {
 
           <Link
             to="/saved"
-            className="inline-flex h-9 items-center gap-1.5 px-3 text-xs font-medium text-muted hover:text-foreground rounded-lg hover:bg-card-2 transition-colors"
+            className="inline-flex h-8 items-center gap-1.5 px-2.5 text-xs font-medium text-zinc-400 hover:text-white rounded-md hover:bg-white/[0.05] transition-colors"
           >
-            <Bookmark className="size-3.5 text-muted-foreground" />
-            <span>Saved Plans</span>
+            <Bookmark className="size-3.5" />
+            <span>Saved</span>
             {savedCount > 0 ? (
-              <span className="ml-1 px-1.5 py-0.2 rounded-full text-[10px] font-mono font-semibold bg-emerald-500/20 text-emerald-300">
+              <span className="ml-0.5 px-1.5 py-0.2 rounded-full text-[10px] font-mono font-medium bg-white/[0.08] text-emerald-300">
                 {savedCount}
               </span>
             ) : null}
@@ -71,15 +71,14 @@ export function AppHeader({ className }: { className?: string }) {
             href="https://project-manage-z6u.pages.dev/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-9 items-center gap-1.5 px-2.5 sm:px-3 text-xs font-medium text-emerald-400 bg-emerald-950/30 border border-emerald-500/30 rounded-lg hover:bg-emerald-900/40 hover:border-emerald-500/50 hover:text-emerald-300 transition-colors"
+            className="inline-flex h-8 items-center gap-1.5 px-2.5 text-xs font-medium text-zinc-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] rounded-md transition-all"
             title="Product Hub — 96 Projects & Master Launch OS"
           >
             <FolderKanban className="size-3.5 text-emerald-400" />
             <span className="hidden sm:inline">Product Hub</span>
-            <ExternalLink className="size-3 text-emerald-400/70" />
+            <ExternalLink className="size-3 text-zinc-500 group-hover:text-zinc-300" />
           </a>
 
-          {/* Dedicated Homescreen Install CTA */}
           <PwaInstallButton />
         </nav>
       </div>

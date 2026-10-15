@@ -338,45 +338,45 @@ function ProfileHero({
 }) {
   const growth = formatGrowth(profile.growth30d ?? undefined);
   return (
-    <section className="mt-4 rounded-2xl bg-card border border-border/80 p-5 sm:p-7 shadow-xl shadow-black/40">
-      <div className="flex items-start gap-4">
-        <div className="flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-card-2 border border-border text-sm font-semibold text-muted">
+    <section className="mt-4 rounded-xl bg-card/60 border border-white/[0.07] p-4.5 sm:p-6 shadow-sm">
+      <div className="flex items-start gap-3.5">
+        <div className="flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-zinc-900 border border-white/[0.08] text-xs font-semibold text-zinc-400">
           {profile.icon && !iconBroken ? (
             <img
               src={profile.icon}
               alt=""
               referrerPolicy="no-referrer"
-              className="size-14 object-cover"
+              className="size-12 object-cover"
               onError={onIconError}
             />
           ) : (
-            <span className="font-mono">{initials(profile.name)}</span>
+            <span className="font-mono text-xs">{initials(profile.name)}</span>
           )}
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
             <PlatformIcon kind={profile.kind} className="size-3.5 shrink-0" />
-            <span className="text-[10px] font-mono uppercase tracking-wider text-muted font-medium">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 font-medium">
               {profile.sourceLabel}
               {profile.category ? ` • ${profile.category}` : ""}
             </span>
           </div>
-          <h1 className="mt-1 text-xl sm:text-2xl font-bold tracking-tight text-foreground leading-snug">
+          <h1 className="mt-1 text-lg sm:text-xl font-semibold tracking-tight text-white leading-snug">
             {profile.name}
           </h1>
-          <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-muted line-clamp-3">
+          <p className="mt-1 text-xs leading-relaxed text-zinc-400 line-clamp-3">
             {profile.description}
           </p>
-          <div className="mt-3 flex flex-wrap gap-1.5">
-            {profile.onSale ? <Badge variant="outline" className="text-[10px]">For sale</Badge> : null}
-            {profile.stealthMode ? <Badge className="text-[10px]">Stealth</Badge> : null}
-            {profile.developer ? <Badge variant="default" className="text-[10px]">{profile.developer}</Badge> : null}
-            {profile.subreddit ? <Badge variant="outline" className="text-[10px]">r/{profile.subreddit}</Badge> : null}
+          <div className="mt-2.5 flex flex-wrap gap-1.5">
+            {profile.onSale ? <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-white/[0.04] text-zinc-400 border border-white/[0.06]">For sale</span> : null}
+            {profile.stealthMode ? <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-white/[0.04] text-zinc-400 border border-white/[0.06]">Stealth</span> : null}
+            {profile.developer ? <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-white/[0.04] text-zinc-400 border border-white/[0.06]">{profile.developer}</span> : null}
+            {profile.subreddit ? <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-white/[0.04] text-zinc-400 border border-white/[0.06]">r/{profile.subreddit}</span> : null}
           </div>
         </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-3 gap-3 border-t border-border/70 pt-5">
+      <div className="mt-5 grid grid-cols-3 gap-2.5 border-t border-white/[0.06] pt-4">
         {profile.kind === "trustmrr" ? (
           <>
             <Money label="Last 30 days" value={formatUsd(profile.revenue.last30Days)} />
@@ -413,25 +413,25 @@ function ProfileHero({
         )}
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-2 pt-3 border-t border-border/50">
+      <div className="mt-3.5 flex flex-wrap gap-2 pt-3 border-t border-white/[0.05]">
         <a
           href={profile.sourceUrl}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex h-8 items-center gap-1.5 rounded-lg px-2.5 text-xs text-muted hover:text-foreground bg-card-2 border border-border/60 hover:border-border transition-colors"
+          className="inline-flex h-7 items-center gap-1.5 rounded-md px-2 text-[11px] text-zinc-400 hover:text-white bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.06] transition-colors"
         >
           <span>View on {profile.sourceLabel}</span>
-          <ExternalLink className="size-3 text-faint" />
+          <ExternalLink className="size-2.5 text-zinc-500" />
         </a>
         {profile.website && profile.website !== profile.sourceUrl ? (
           <a
             href={profile.website}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-8 items-center gap-1.5 rounded-lg px-2.5 text-xs text-muted hover:text-foreground bg-card-2 border border-border/60 hover:border-border transition-colors"
+            className="inline-flex h-7 items-center gap-1.5 rounded-md px-2 text-[11px] text-zinc-400 hover:text-white bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.06] transition-colors"
           >
             <span>Website</span>
-            <ExternalLink className="size-3 text-faint" />
+            <ExternalLink className="size-2.5 text-zinc-500" />
           </a>
         ) : null}
       </div>
@@ -456,7 +456,10 @@ function GenerateButton({
       onClick={onClick}
       disabled={busy}
       className={cn(
-        "h-9 px-4 text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm transition-all",
+        "h-9 px-4 text-xs font-medium rounded-lg transition-all",
+        planReady
+          ? "bg-white/[0.04] hover:bg-white/[0.08] text-zinc-200 border border-white/[0.08]"
+          : "bg-zinc-100 hover:bg-white text-zinc-950 shadow-sm",
         className
       )}
     >
@@ -467,33 +470,33 @@ function GenerateButton({
       ) : (
         <Sparkles className="size-3.5 mr-1.5" />
       )}
-      <span>{busy ? "Generating Plan..." : planReady ? "Regenerate Blueprint" : "Generate Vibe Plan"}</span>
+      <span>{busy ? "Generating..." : planReady ? "Regenerate Blueprint" : "Generate Vibe Blueprint"}</span>
     </Button>
   );
 }
 
 function GeneratePanel({ busy, onGenerate, name }: { busy: boolean; onGenerate: () => void; name: string }) {
   return (
-    <section id="vibe-plan" className="rounded-2xl bg-card border border-emerald-500/30 p-8 sm:p-10 text-center shadow-xl shadow-black/50 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
-      <span className="px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-emerald-950/40 text-emerald-400 border border-emerald-800/40 font-semibold">
-        AI Vibe-Coding Generator
-      </span>
-      <h3 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+    <section id="vibe-plan" className="rounded-xl bg-white/[0.015] border border-white/[0.08] p-6 sm:p-8 text-center relative overflow-hidden">
+      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider uppercase text-zinc-400 bg-white/[0.03] border border-white/[0.06]">
+        <Sparkles className="size-3 text-emerald-400" />
+        <span>Vibe Engine</span>
+      </div>
+      <h3 className="mt-2 text-xl sm:text-2xl font-semibold tracking-tight text-white">
         Build {name} with your AI coding agent
       </h3>
-      <p className="mx-auto mt-2 max-w-lg text-xs sm:text-sm leading-relaxed text-muted">
-        Generates a 27-section master PRD and step-by-step implementation prompts covering architecture, schema, auth, core feature logic, UI polish, and acceptance tests.
+      <p className="mx-auto mt-1.5 max-w-md text-xs leading-relaxed text-zinc-400">
+        Generates a 27-section master PRD and sequenced prompts covering architecture, schema, features, and deployment.
       </p>
-      <div className="mt-6 flex justify-center">
+      <div className="mt-5 flex justify-center">
         <Button
           type="button"
           onClick={onGenerate}
           disabled={busy}
-          className="h-11 px-6 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-emerald-950/40 transition-all hover:scale-[1.02]"
+          className="h-9.5 px-5 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 font-medium text-xs shadow-sm transition-all"
         >
-          {busy ? <LoaderCircle className="size-4 animate-spin mr-2" /> : <Sparkles className="size-4 mr-2" />}
-          <span>{busy ? "Generating Prompts..." : "Generate Vibe Coding Blueprint"}</span>
+          {busy ? <LoaderCircle className="size-3.5 animate-spin mr-1.5" /> : <Sparkles className="size-3.5 mr-1.5" />}
+          <span>{busy ? "Generating Blueprint..." : "Generate Vibe Blueprint"}</span>
         </Button>
       </div>
     </section>
@@ -503,9 +506,9 @@ function GeneratePanel({ busy, onGenerate, name }: { busy: boolean; onGenerate: 
 function Money({ label, value, extra }: { label: string; value: string; extra?: string | null }) {
   return (
     <div>
-      <p className="text-[10px] uppercase font-mono tracking-wider text-faint">{label}</p>
-      <p className="mt-1 font-mono text-base sm:text-lg font-semibold tabular-nums text-foreground">{value}</p>
-      {extra ? <p className="text-[11px] tabular-nums text-emerald-400 font-medium">{extra}</p> : null}
+      <p className="text-[9px] uppercase font-mono tracking-wider text-zinc-500">{label}</p>
+      <p className="mt-0.5 font-mono text-sm sm:text-base font-medium tabular-nums text-zinc-200">{value}</p>
+      {extra ? <p className="text-[10px] font-mono tabular-nums text-emerald-400">{extra}</p> : null}
     </div>
   );
 }
@@ -514,11 +517,11 @@ function HitPending() {
   return (
     <div className="min-h-dvh bg-background">
       <AppHeader />
-      <div className="mx-auto max-w-3xl px-4 pt-10">
-        <Skeleton className="h-6 w-24 rounded-full" />
-        <Skeleton className="mt-4 h-10 w-64 rounded-xl" />
-        <Skeleton className="mt-6 h-48 w-full rounded-2xl" />
-        <Skeleton className="mt-6 h-36 w-full rounded-2xl" />
+      <div className="mx-auto max-w-3xl px-4 pt-8">
+        <Skeleton className="h-5 w-24 rounded-full bg-white/[0.05]" />
+        <Skeleton className="mt-3.5 h-8 w-60 rounded-lg bg-white/[0.05]" />
+        <Skeleton className="mt-5 h-40 w-full rounded-xl bg-white/[0.04] border border-white/[0.05]" />
+        <Skeleton className="mt-5 h-32 w-full rounded-xl bg-white/[0.04] border border-white/[0.05]" />
       </div>
     </div>
   );

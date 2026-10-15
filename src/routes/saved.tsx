@@ -39,25 +39,25 @@ function SavedPage() {
       <main className="mx-auto max-w-3xl px-4 sm:px-6">
         <Link
           to="/"
-          className="mt-6 inline-flex h-9 items-center gap-1.5 text-xs font-medium text-muted hover:text-foreground transition-colors"
+          className="mt-6 inline-flex h-8 items-center gap-1.5 text-xs font-medium text-zinc-500 hover:text-white transition-colors"
         >
           <ArrowLeft className="size-3.5" />
-          Back to Scout
+          <span>Back to Scout</span>
         </Link>
 
-        <div className="mt-4 flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-6 border-b border-border/80">
+        <div className="mt-4 flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-5 border-b border-white/[0.06]">
           <div>
             <div className="flex items-center gap-2">
-              <Bookmark className="size-4 text-emerald-400" />
-              <p className="text-[10px] uppercase font-mono tracking-wider text-faint font-semibold">
-                Saved Blueprints
+              <Bookmark className="size-3.5 text-emerald-400" />
+              <p className="text-[10px] uppercase font-mono tracking-wider text-zinc-500 font-medium">
+                Vault
               </p>
             </div>
-            <h1 className="mt-1 text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-              Your Idea Vault
+            <h1 className="mt-1 text-xl sm:text-2xl font-semibold tracking-tight text-white">
+              Saved Blueprints
             </h1>
-            <p className="mt-1 text-xs text-muted">
-              {items.length === 1 ? "1 saved vibe-code plan" : `${items.length} saved vibe-code plans`} stored on this device.
+            <p className="mt-0.5 text-xs text-zinc-400">
+              {items.length === 1 ? "1 saved vibe plan" : `${items.length} saved vibe plans`} stored on this device.
             </p>
           </div>
 
@@ -67,49 +67,49 @@ function SavedPage() {
               variant="outline"
               size="sm"
               onClick={exportAll}
-              className="text-xs h-9 border-border bg-card hover:bg-card-2 text-foreground shrink-0"
+              className="text-xs h-8 border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.06] text-zinc-300 shrink-0"
             >
-              <Download className="size-3.5 mr-1.5 text-muted" />
-              Export All (.json)
+              <Download className="size-3 mr-1.5 text-zinc-400" />
+              Export JSON
             </Button>
           ) : null}
         </div>
 
-        {/* Product Hub Companion Banner */}
-        <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 text-xs shadow-lg">
-          <div className="flex items-center gap-2.5">
-            <FolderKanban className="size-4 text-emerald-400 shrink-0" />
-            <span className="text-foreground">
-              Ready to execute these blueprints? Track tasks and launch stages in{" "}
-              <strong className="text-emerald-300">Product Hub</strong> (817-task Master Launch OS).
+        {/* Product Hub Companion Strip */}
+        <div className="mt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 p-3.5 rounded-xl border border-white/[0.07] bg-white/[0.02] text-xs">
+          <div className="flex items-center gap-2">
+            <FolderKanban className="size-3.5 text-emerald-400 shrink-0" />
+            <span className="text-zinc-300 text-xs">
+              Ready to execute? Track tasks and launch stages in{" "}
+              <strong className="text-white font-medium">Product Hub</strong> (817-task launch OS).
             </span>
           </div>
-          <Button asChild size="sm" variant="outline" className="h-8 text-xs shrink-0 border-emerald-500/40 text-emerald-300 hover:bg-emerald-900/40 hover:text-white">
+          <Button asChild size="sm" variant="outline" className="h-7 text-[11px] shrink-0 border-white/[0.08] bg-white/[0.03] text-zinc-300 hover:text-white hover:bg-white/[0.06]">
             <a href="https://project-manage-z6u.pages.dev/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5">
-              <span>Open in Product Hub</span>
-              <ExternalLink className="size-3" />
+              <span>Open Product Hub</span>
+              <ExternalLink className="size-2.5 opacity-60" />
             </a>
           </Button>
         </div>
 
         {items.length === 0 ? (
-          <div className="mt-10 rounded-2xl bg-card border border-border/80 p-12 text-center shadow-lg">
-            <div className="mx-auto size-12 rounded-2xl bg-card-2 border border-border/70 flex items-center justify-center text-muted">
-              <Bookmark className="size-6 text-faint" />
+          <div className="mt-8 rounded-xl bg-white/[0.02] border border-white/[0.06] p-10 text-center">
+            <div className="mx-auto size-10 rounded-lg bg-zinc-900 border border-white/[0.08] flex items-center justify-center text-zinc-500">
+              <Bookmark className="size-5" />
             </div>
-            <p className="mt-4 text-base font-semibold text-foreground">No saved blueprints yet</p>
-            <p className="mt-1.5 text-xs text-muted max-w-sm mx-auto leading-relaxed">
-              Explore ideas from Reddit, Product Hunt, App Store, Play Store, or TrustMRR, then tap Save on any generated vibe plan.
+            <p className="mt-3 text-sm font-medium text-zinc-300">No saved blueprints yet</p>
+            <p className="mt-1 text-xs text-zinc-500">
+              Explore ideas from Reddit, Product Hunt, App Store, Play Store, or TrustMRR, then tap Save on any generated plan.
             </p>
-            <Button asChild className="mt-6 bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs px-5 h-9">
+            <Button asChild size="sm" className="mt-5 h-8.5 px-4 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 font-medium text-xs shadow-sm">
               <Link to="/">
                 <Compass className="size-3.5 mr-1.5" />
-                Go Scout Ideas
+                <span>Go Scout Ideas</span>
               </Link>
             </Button>
           </div>
         ) : (
-          <ul className="mt-6 flex flex-col gap-3">
+          <ul className="mt-5 flex flex-col gap-2.5">
             {items.map((item) => {
               const parsed = parseHitKey(item.brief.slug);
               const kind = item.profile.kind ?? parsed?.kind ?? "trustmrr";
@@ -117,28 +117,28 @@ function SavedPage() {
               return (
                 <li
                   key={item.brief.slug}
-                  className="rounded-2xl bg-card border border-border/80 p-5 transition-all hover:border-emerald-500/30 hover:bg-card-2 shadow-sm"
+                  className="rounded-xl bg-card/60 hover:bg-card-2/80 border border-white/[0.06] hover:border-white/[0.14] p-4 transition-all shadow-sm"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
                         <PlatformIcon kind={kind} className="size-3.5 shrink-0" />
-                        <span className="text-[10px] font-mono uppercase tracking-wider text-muted font-medium">
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400">
                           {kind}
                         </span>
-                        <span className="text-[10px] text-faint">•</span>
-                        <span className="text-[10px] font-mono text-emerald-400">
+                        <span className="text-zinc-600 text-[10px]">•</span>
+                        <span className="text-[10px] font-mono text-zinc-400">
                           {item.brief.vibeGuide?.length ?? 5} steps
                         </span>
                       </div>
-                      <h3 className="mt-1 font-semibold text-base text-foreground truncate">
+                      <h3 className="mt-1 font-semibold text-sm text-zinc-100 truncate">
                         {item.brief.productName}
                       </h3>
-                      <p className="mt-0.5 text-xs text-muted truncate">
-                        Ship <strong className="text-foreground">{item.brief.opportunity.betterName}</strong> — {item.brief.opportunity.positioning}
+                      <p className="mt-0.5 text-xs text-zinc-400 truncate">
+                        Ship <span className="text-zinc-200 font-medium">{item.brief.opportunity.betterName}</span> — {item.brief.opportunity.positioning}
                       </p>
                       {kind === "trustmrr" && item.profile.revenue?.last30Days ? (
-                        <p className="mt-2 font-mono text-[11px] text-emerald-300">
+                        <p className="mt-1.5 font-mono text-[11px] text-zinc-300">
                           {formatUsd(item.profile.revenue.last30Days)} / 30d
                         </p>
                       ) : null}
@@ -168,23 +168,23 @@ function SavedPage() {
                             })),
                           });
                         }}
-                        className="h-9 px-3 text-xs border-emerald-500/40 bg-emerald-950/30 text-emerald-300 hover:bg-emerald-900/50 hover:text-white"
+                        className="h-8 px-2.5 text-xs border-white/[0.08] bg-white/[0.03] text-zinc-300 hover:text-white hover:bg-white/[0.06]"
                         title="Push to Project Manage"
                       >
-                        <FolderKanban className="size-3.5 mr-1 text-emerald-400" />
-                        <span>Push to Project</span>
+                        <FolderKanban className="size-3 mr-1 text-zinc-400" />
+                        <span>Push</span>
                       </Button>
-                      <Button asChild size="sm" className="h-9 px-3.5 text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white">
+                      <Button asChild size="sm" className="h-8 px-3 text-xs font-medium bg-zinc-100 hover:bg-white text-zinc-950">
                         <Link to="/hit/$kind/$id" params={{ kind, id }}>
                           <span>Open Plan</span>
-                          <Sparkles className="size-3 ml-1.5" />
+                          <Sparkles className="size-3 ml-1" />
                         </Link>
                       </Button>
                       <Button
                         type="button"
                         size="sm"
                         variant="ghost"
-                        className="h-9 px-2.5 text-xs text-muted hover:text-rose-400 hover:bg-rose-950/20"
+                        className="h-8 px-2 text-xs text-zinc-500 hover:text-rose-400 hover:bg-rose-950/20"
                         onClick={() => setItems(removeBrief(item.brief.slug))}
                         aria-label="Remove"
                       >

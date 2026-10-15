@@ -159,61 +159,61 @@ function Home() {
     <div className="min-h-dvh bg-background">
       <AppHeader />
       <main className="mx-auto max-w-6xl px-4 pb-24 sm:px-6">
-        {/* Minimal Premium Hero */}
+        {/* Minimal Editorial Hero */}
         <Hero desk={desk} count={count} />
 
         {/* Omnibar Search & Direct URL Deconstruct */}
-        <form onSubmit={onLookup} className="mt-8 relative">
-          <div className="flex flex-col sm:flex-row gap-2.5 p-1.5 rounded-2xl bg-card border border-border/80 shadow-lg shadow-black/40 focus-within:border-emerald-500/50 transition-all">
+        <form onSubmit={onLookup} className="mt-6 relative">
+          <div className="flex flex-col sm:flex-row gap-2 p-1 rounded-xl bg-zinc-900/50 border border-white/[0.08] hover:border-white/[0.16] focus-within:border-emerald-500/40 focus-within:ring-1 focus-within:ring-emerald-500/20 backdrop-blur-xl transition-all shadow-sm">
             <div className="relative flex-1 flex items-center">
-              <Search className="pointer-events-none absolute left-3.5 size-4 text-faint" />
+              <Search className="pointer-events-none absolute left-3 size-4 text-zinc-500" />
               <Input
                 value={query}
                 onChange={(e) => {
                   setQuery(e.target.value);
                   setLookupError(null);
                 }}
-                placeholder="Search ideas, or paste any Reddit / Product Hunt / App Store / Play Store / TrustMRR / X URL..."
-                className="pl-10 pr-9 border-0 bg-transparent focus-visible:ring-0 text-sm h-11 text-foreground placeholder:text-muted/60"
+                placeholder="Search ideas, or paste any Reddit / Product Hunt / App Store / Play Store / TrustMRR URL..."
+                className="pl-9 pr-8 border-0 bg-transparent focus-visible:ring-0 text-xs sm:text-sm h-9.5 text-zinc-100 placeholder:text-zinc-500"
                 aria-label="Search opportunities"
               />
               {query ? (
                 <button
                   type="button"
                   onClick={() => setQuery("")}
-                  className="absolute right-3 p-1 rounded-md text-faint hover:text-foreground"
+                  className="absolute right-2.5 p-1 rounded-md text-zinc-500 hover:text-zinc-200"
                 >
-                  <X className="size-4" />
+                  <X className="size-3.5" />
                 </button>
               ) : null}
             </div>
             <Button
               type="submit"
-              className="h-11 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs sm:w-auto shrink-0 transition-colors shadow-sm"
+              className="h-9.5 px-4 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 font-medium text-xs sm:w-auto shrink-0 transition-colors shadow-sm"
             >
               <span>Analyze & Build</span>
-              <ArrowRight className="size-3.5 ml-1.5" />
+              <ArrowRight className="size-3 ml-1" />
             </Button>
           </div>
-          {lookupError ? <p className="mt-2 text-xs text-rose-400 pl-2">{lookupError}</p> : null}
+          {lookupError ? <p className="mt-2 text-xs text-rose-400 pl-1">{lookupError}</p> : null}
         </form>
 
         {/* Platform Source Selector Tabs */}
-        <div className="mt-8">
+        <div className="mt-6">
           <div className="flex items-center justify-between gap-2 pb-2">
-            <div className="flex items-center gap-2">
-              <Filter className="size-3.5 text-emerald-400" />
-              <span className="text-xs font-semibold uppercase tracking-wider text-muted">
-                Explore Sources
+            <div className="flex items-center gap-1.5">
+              <Filter className="size-3 text-zinc-500" />
+              <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-400">
+                Channels
               </span>
             </div>
-            <span className="text-[11px] font-mono text-faint">
-              {ALL_DESKS.length} live channels
+            <span className="text-[10px] font-mono text-zinc-600">
+              {ALL_DESKS.length} live desks
             </span>
           </div>
 
-          {/* Primary 6 Requested Platforms */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 pt-1">
+          {/* Primary 6 Platforms */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-1.5 pt-0.5">
             {PRIMARY_DESKS.map((d) => {
               const active = desk === d.id;
               const hitCount = d.id === "trustmrr" ? feed.earning.length : (deskHits[d.id]?.length ?? (deskLoading[d.id] ? "…" : "—"));
@@ -223,20 +223,20 @@ function Home() {
                   type="button"
                   onClick={() => setDesk(d.id)}
                   className={cn(
-                    "flex items-center justify-between p-2.5 rounded-xl border text-xs font-medium transition-all group",
+                    "flex items-center justify-between p-2 rounded-lg border text-xs font-medium transition-all group",
                     active
-                      ? "bg-card-2 border-emerald-500/50 text-foreground shadow-[0_0_15px_rgba(16,185,129,0.15)] ring-1 ring-emerald-500/20"
-                      : "bg-card/70 border-border/70 text-muted hover:text-foreground hover:bg-card-2 hover:border-border"
+                      ? "bg-white/[0.08] border-white/20 text-white shadow-sm"
+                      : "bg-white/[0.02] border-white/[0.05] text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04] hover:border-white/[0.10]"
                   )}
                 >
-                  <div className="flex items-center gap-2 min-w-0">
-                    <PlatformIcon kind={d.id} className="size-4 shrink-0" />
-                    <span className="truncate">{d.label}</span>
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <PlatformIcon kind={d.id} className="size-3.5 shrink-0" />
+                    <span className="truncate text-xs">{d.label}</span>
                   </div>
                   <span
                     className={cn(
-                      "text-[10px] font-mono px-1.5 py-0.5 rounded-md tabular-nums shrink-0",
-                      active ? "bg-emerald-500/20 text-emerald-300 font-semibold" : "bg-card text-faint"
+                      "text-[10px] font-mono px-1 py-0.2 rounded tabular-nums shrink-0",
+                      active ? "bg-white/[0.12] text-white font-medium" : "text-zinc-600"
                     )}
                   >
                     {hitCount}
@@ -246,10 +246,10 @@ function Home() {
             })}
           </div>
 
-          {/* Other Sites Toggle / Row */}
-          <div className="mt-2.5 flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-            <span className="text-[11px] uppercase tracking-wider font-mono text-faint px-2 shrink-0">
-              Other Sites:
+          {/* Other Desks Strip */}
+          <div className="mt-2 flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+            <span className="text-[10px] uppercase tracking-wider font-mono text-zinc-600 px-1 shrink-0">
+              More:
             </span>
             {OTHER_DESKS.map((d) => {
               const active = desk === d.id;
@@ -260,15 +260,15 @@ function Home() {
                   type="button"
                   onClick={() => setDesk(d.id)}
                   className={cn(
-                    "h-8 shrink-0 rounded-lg px-2.5 text-xs inline-flex items-center gap-1.5 border transition-all",
+                    "h-7 shrink-0 rounded-md px-2 text-[11px] inline-flex items-center gap-1.5 border transition-all",
                     active
-                      ? "bg-card-2 border-emerald-500/40 text-foreground font-medium"
-                      : "bg-card/40 border-border/50 text-muted hover:text-foreground hover:bg-card-2"
+                      ? "bg-white/[0.08] border-white/20 text-white font-medium"
+                      : "bg-white/[0.02] border-white/[0.05] text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04]"
                   )}
                 >
-                  <PlatformIcon kind={d.id} className="size-3.5 shrink-0" />
+                  <PlatformIcon kind={d.id} className="size-3 shrink-0" />
                   <span>{d.label}</span>
-                  <span className="font-mono text-[10px] text-faint tabular-nums">{hitCount}</span>
+                  <span className="font-mono text-[9px] text-zinc-600 tabular-nums">{hitCount}</span>
                 </button>
               );
             })}
@@ -276,41 +276,41 @@ function Home() {
         </div>
 
         {/* Desk Description Hint */}
-        <div className="mt-3 flex items-center justify-between text-xs text-faint px-1">
-          <p>{ALL_DESKS.find((d) => d.id === desk)?.hint}</p>
+        <div className="mt-2.5 flex items-center justify-between text-xs text-zinc-500 px-0.5">
+          <p className="line-clamp-1">{ALL_DESKS.find((d) => d.id === desk)?.hint}</p>
           {deskLoading[desk] ? (
-            <span className="text-emerald-400 font-mono text-[11px] animate-pulse">Syncing feed...</span>
+            <span className="text-emerald-400 font-mono text-[10px] shrink-0 ml-2">Syncing...</span>
           ) : null}
         </div>
-        {deskError[desk] ? <p className="mt-2 text-xs text-rose-400">{deskError[desk]}</p> : null}
+        {deskError[desk] ? <p className="mt-1.5 text-xs text-rose-400">{deskError[desk]}</p> : null}
 
         {/* TrustMRR subtabs if TrustMRR is selected */}
         {desk === "trustmrr" ? (
-          <div className="mt-6">
-            <div className="flex gap-2 overflow-x-auto pb-1">
+          <div className="mt-5">
+            <div className="flex gap-1.5 p-1 rounded-xl bg-white/[0.02] border border-white/[0.06] overflow-x-auto">
               {TMRR_TABS.map((t) => (
                 <button
                   key={t.id}
                   type="button"
                   onClick={() => setTmrrTab(t.id)}
                   className={cn(
-                    "h-9 shrink-0 rounded-xl px-3.5 text-xs font-medium transition-all border",
+                    "h-8 shrink-0 rounded-lg px-3 text-xs font-medium transition-all inline-flex items-center gap-1.5",
                     tmrrTab === t.id
-                      ? "bg-emerald-950/30 border-emerald-500/40 text-emerald-300"
-                      : "bg-card border-border/70 text-muted hover:text-foreground"
+                      ? "bg-white/[0.08] text-white border border-white/10 shadow-sm"
+                      : "text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.03]"
                   )}
                 >
-                  {t.label}
-                  <span className="ml-2 font-mono text-[10px] tabular-nums text-faint">{feed[t.id].length}</span>
+                  <span>{t.label}</span>
+                  <span className="font-mono text-[10px] text-zinc-500 tabular-nums">{feed[t.id].length}</span>
                 </button>
               ))}
             </div>
             <ProductGrid products={filteredTmrr} />
           </div>
         ) : deskLoading[desk] && !deskHits[desk] ? (
-          <div className="mt-6 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, i) => (
-              <Skeleton key={i} className="h-56 rounded-2xl bg-card border border-border/60" />
+              <Skeleton key={i} className="h-44 rounded-xl bg-card border border-white/[0.05]" />
             ))}
           </div>
         ) : (
@@ -344,50 +344,38 @@ function emptyCopy(desk: DeskKind): string {
 function Hero({ desk, count }: { desk: DeskKind; count: number }) {
   const copy = heroCopy(desk, count);
   return (
-    <section className="stagger-in pt-8 sm:pt-12">
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono uppercase tracking-wider bg-card-2 border border-border text-emerald-400 font-medium">
-          {copy.kicker}
-        </span>
-        <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono text-muted bg-card border border-border">
-          {copy.live}
-        </span>
-        <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium text-emerald-300 bg-emerald-950/40 border border-emerald-800/40">
-          {copy.badge}
-        </span>
+    <section className="pt-6 sm:pt-10">
+      <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-[11px] font-mono tracking-wide bg-white/[0.03] text-zinc-400 border border-white/[0.06]">
+        <span className="size-1.5 rounded-full bg-emerald-400" />
+        <span className="text-zinc-200">{copy.kicker}</span>
+        <span className="text-zinc-600">•</span>
+        <span>{copy.badge}</span>
       </div>
 
-      <h1 className="mt-4 max-w-4xl text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground leading-[1.12]">
-        {copy.title.map((line, idx) => (
-          <span
-            key={line}
-            className={cn("block", idx === 2 ? "text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300" : "")}
-          >
-            {line}
-          </span>
-        ))}
+      <h1 className="mt-3.5 max-w-3xl text-2xl sm:text-4xl lg:text-[42px] font-semibold tracking-tight text-white leading-[1.15]">
+        {copy.title[0]} {copy.title[1]}{" "}
+        <span className="text-zinc-400 font-normal">{copy.title[2]}</span>
       </h1>
 
-      <p className="mt-4 max-w-2xl text-sm sm:text-base leading-relaxed text-muted">
+      <p className="mt-2.5 max-w-xl text-xs sm:text-sm leading-relaxed text-zinc-400">
         {copy.body}
       </p>
 
-      {/* 3 Step Workflow */}
-      <ol className="mt-7 grid gap-3 sm:grid-cols-3">
-        {copy.steps.map((s) => (
-          <li
-            key={s.n}
-            className="rounded-2xl bg-card/80 border border-border/80 p-4 transition-colors hover:border-emerald-500/30 hover:bg-card-2"
-          >
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-semibold text-emerald-400">{s.n}</span>
-              <Sparkles className="size-3.5 text-faint" />
-            </div>
-            <p className="mt-2 font-semibold text-sm text-foreground">{s.t}</p>
-            <p className="mt-1 text-xs leading-relaxed text-muted">{s.d}</p>
-          </li>
+      {/* Minimal Playbook Strip */}
+      <div className="mt-4.5 flex flex-wrap items-center gap-2 sm:gap-3 py-2 px-3 rounded-lg bg-white/[0.02] border border-white/[0.05] text-xs">
+        <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">
+          Playbook:
+        </span>
+        {copy.steps.map((s, idx) => (
+          <div key={s.n} className="flex items-center gap-1.5 text-zinc-300">
+            <span className="font-mono text-[10px] text-zinc-500">{s.n}</span>
+            <span className="font-medium text-xs">{s.t}</span>
+            {idx < copy.steps.length - 1 ? (
+              <span className="text-zinc-700 ml-1">→</span>
+            ) : null}
+          </div>
         ))}
-      </ol>
+      </div>
     </section>
   );
 }
@@ -513,14 +501,14 @@ function trustHero(count: number) {
 function ProductGrid({ products }: { products: ScoutProduct[] }) {
   if (products.length === 0) {
     return (
-      <div className="mt-8 rounded-2xl bg-card border border-border p-12 text-center">
-        <p className="font-semibold text-foreground">Nothing in this cut</p>
-        <p className="mt-1 text-xs text-muted">Try another tab, or paste a TrustMRR URL above.</p>
+      <div className="mt-6 rounded-xl bg-white/[0.02] border border-white/[0.06] p-10 text-center">
+        <p className="text-sm font-medium text-zinc-300">No items match this filter</p>
+        <p className="mt-1 text-xs text-zinc-500">Try another tab, or search a keyword above.</p>
       </div>
     );
   }
   return (
-    <div className="mt-6 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {products.map((p) => (
         <ProductCard key={p.slug} product={p} />
       ))}
@@ -531,14 +519,14 @@ function ProductGrid({ products }: { products: ScoutProduct[] }) {
 function HitGrid({ hits, empty }: { hits: ScoutHit[]; empty: string }) {
   if (hits.length === 0) {
     return (
-      <div className="mt-8 rounded-2xl bg-card border border-border p-12 text-center">
-        <p className="font-semibold text-foreground">Nothing in this desk right now</p>
-        <p className="mt-1 text-xs text-muted">{empty}</p>
+      <div className="mt-6 rounded-xl bg-white/[0.02] border border-white/[0.06] p-10 text-center">
+        <p className="text-sm font-medium text-zinc-300">Desk channel is quiet right now</p>
+        <p className="mt-1 text-xs text-zinc-500">{empty}</p>
       </div>
     );
   }
   return (
-    <div className="mt-6 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {hits.map((h) => (
         <HitCard key={`${h.kind}:${h.id}`} hit={h} />
       ))}
@@ -550,12 +538,12 @@ function ScoutPending() {
   return (
     <div className="min-h-dvh bg-background">
       <AppHeader />
-      <div className="mx-auto max-w-6xl px-4 pt-12 sm:px-6">
-        <Skeleton className="h-6 w-32 rounded-full" />
-        <Skeleton className="mt-4 h-12 w-full max-w-xl rounded-xl" />
-        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mx-auto max-w-6xl px-4 pt-10 sm:px-6">
+        <Skeleton className="h-5 w-28 rounded-full bg-white/[0.05]" />
+        <Skeleton className="mt-3.5 h-10 w-full max-w-md rounded-lg bg-white/[0.05]" />
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <Skeleton key={i} className="h-56 rounded-2xl" />
+            <Skeleton key={i} className="h-44 rounded-xl bg-white/[0.04] border border-white/[0.05]" />
           ))}
         </div>
       </div>

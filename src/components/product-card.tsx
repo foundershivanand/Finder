@@ -45,63 +45,63 @@ export function HitCard({ hit, moneyTone }: { hit: ScoutHit; moneyTone?: boolean
   // Distinguish pain point vs ask vs description
   const isAsk = hit.kind === "reddit" || hit.kind === "twitter" || hit.kind === "hackernews";
   const isStore = hit.kind === "appstore" || hit.kind === "playstore";
-  const painLabel = isAsk ? "Unmet Request" : isStore ? "1-Star Opportunity" : "Market Flank";
+  const painLabel = isAsk ? "Unmet Request" : isStore ? "1-Star Flank" : "Market Wedge";
 
   return (
     <div
-      className="group relative flex flex-col justify-between rounded-2xl bg-card/90 border border-border/80 p-5 transition-all duration-200 ease-out hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-card-2 hover:shadow-[0_12px_36px_-10px_rgba(0,0,0,0.8),0_0_20px_rgba(16,185,129,0.06)]"
+      className="group relative flex flex-col justify-between rounded-xl bg-card/60 hover:bg-card-2/80 border border-white/[0.06] hover:border-white/[0.14] p-4.5 transition-all duration-200 ease-out hover:-translate-y-0.5 shadow-sm hover:shadow-[0_10px_30px_rgba(0,0,0,0.6)]"
     >
       {/* Clickable Card Overlay */}
       <Link
         to="/hit/$kind/$id"
         params={{ kind: hit.kind, id: hit.id }}
-        className="absolute inset-0 z-0 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+        className="absolute inset-0 z-0 rounded-xl focus:outline-none focus:ring-1 focus:ring-emerald-500/40"
         aria-label={`View ${hit.name} analysis`}
       />
 
       {/* Card Content */}
       <div className="relative pointer-events-none z-[1]">
         {/* Top Header: Platform Tag + Title + Arrow */}
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex items-center gap-2.5 min-w-0">
-            <div className="size-6 shrink-0 rounded-md overflow-hidden flex items-center justify-center bg-card-2 border border-border/80">
-              <PlatformIcon kind={hit.kind} className="size-4 shrink-0" />
+        <div className="flex items-center justify-between gap-2.5">
+          <div className="flex items-center gap-2 min-w-0">
+            <div className="size-5 shrink-0 rounded-md overflow-hidden flex items-center justify-center bg-zinc-900 border border-white/[0.08]">
+              <PlatformIcon kind={hit.kind} className="size-3.5 shrink-0" />
             </div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-muted truncate">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 truncate">
               {sourceLabel(hit.kind)}
             </span>
             {hit.category ? (
-              <span className="text-[11px] text-faint truncate hidden sm:inline">
+              <span className="text-[10px] text-zinc-500 truncate hidden sm:inline">
                 • {hit.category}
               </span>
             ) : null}
           </div>
 
-          <div className="size-7 rounded-lg bg-card-2 border border-border/60 flex items-center justify-center text-faint group-hover:text-emerald-400 group-hover:border-emerald-500/40 group-hover:bg-emerald-950/20 transition-all shrink-0">
-            <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <div className="size-6 rounded-md bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-zinc-500 group-hover:text-zinc-200 group-hover:border-white/[0.12] transition-all shrink-0">
+            <ArrowUpRight className="size-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </div>
         </div>
 
         {/* Product Identity */}
         <div className="mt-3 flex items-start gap-3">
-          <div className="size-11 shrink-0 rounded-xl overflow-hidden bg-card-2 border border-border/80 flex items-center justify-center text-xs font-semibold text-muted">
+          <div className="size-10 shrink-0 rounded-lg overflow-hidden bg-zinc-900 border border-white/[0.08] flex items-center justify-center text-xs font-semibold text-zinc-400">
             {hit.icon && !broken ? (
               <img
                 src={hit.icon}
                 alt=""
                 referrerPolicy="no-referrer"
-                className="size-11 object-cover"
+                className="size-10 object-cover"
                 onError={() => setBroken(true)}
               />
             ) : (
-              <span className="font-mono">{initials(hit.name)}</span>
+              <span className="font-mono text-[11px]">{initials(hit.name)}</span>
             )}
           </div>
           <div className="min-w-0 flex-1">
-            <h3 className="line-clamp-2 text-sm sm:text-base font-semibold leading-snug text-foreground group-hover:text-white transition-colors">
+            <h3 className="line-clamp-1 text-sm font-semibold tracking-tight text-zinc-100 group-hover:text-white transition-colors">
               {hit.name}
             </h3>
-            <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted">
+            <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-zinc-400">
               {hit.description}
             </p>
           </div>
@@ -109,12 +109,12 @@ export function HitCard({ hit, moneyTone }: { hit: ScoutHit; moneyTone?: boolean
 
         {/* Highlighted Pain Point / 1-Star Callout */}
         {hit.painPreview ? (
-          <div className="mt-3.5 rounded-xl bg-card-2/80 border border-border/60 p-2.5 transition-colors group-hover:border-rose-500/20 group-hover:bg-rose-950/10">
-            <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-rose-400/90 font-medium">
-              <span className="size-1.5 rounded-full bg-rose-400 shrink-0" />
-              {painLabel}
+          <div className="mt-3 rounded-lg bg-white/[0.02] border border-white/[0.05] p-2.5 transition-colors group-hover:border-white/[0.09]">
+            <div className="flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-wider text-rose-400/90 font-medium">
+              <span className="size-1 rounded-full bg-rose-400 shrink-0" />
+              <span>{painLabel}</span>
             </div>
-            <p className="mt-1 text-xs text-foreground/90 leading-relaxed italic line-clamp-2">
+            <p className="mt-1 text-xs text-zinc-300 leading-relaxed italic line-clamp-2">
               "{hit.painPreview}"
             </p>
           </div>
@@ -122,25 +122,24 @@ export function HitCard({ hit, moneyTone }: { hit: ScoutHit; moneyTone?: boolean
       </div>
 
       {/* Card Footer: Metrics & Action */}
-      <div className="mt-4 pt-3.5 border-t border-border/70 flex flex-wrap items-center justify-between gap-2.5 relative z-10 pointer-events-auto">
-        <div className="flex items-center gap-3">
+      <div className="mt-3.5 pt-3 border-t border-white/[0.05] flex items-center justify-between gap-2 relative z-10 pointer-events-auto">
+        <div className="flex items-center gap-2.5">
           {hit.stats.slice(0, 2).map((s) => (
             <div key={s.label}>
-              <p className="text-[9px] uppercase tracking-wider font-mono text-faint">{s.label}</p>
-              <p className="text-xs font-mono font-semibold text-foreground tabular-nums">{s.value}</p>
+              <p className="text-[9px] uppercase tracking-wider font-mono text-zinc-500">{s.label}</p>
+              <p className="text-xs font-mono font-medium text-zinc-200 tabular-nums">{s.value}</p>
             </div>
           ))}
         </div>
 
         <div className="flex items-center gap-1.5">
-          {hit.badges.slice(0, 2).map((b) => (
-            <Badge
+          {hit.badges.slice(0, 1).map((b) => (
+            <span
               key={b}
-              variant={b === "Open flank" ? "pain" : moneyTone || b.startsWith("+") ? "money" : "outline"}
-              className="text-[10px] py-0 px-2 h-5 font-medium"
+              className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/[0.04] text-zinc-400 border border-white/[0.06]"
             >
               {b}
-            </Badge>
+            </span>
           ))}
           <button
             type="button"
@@ -160,20 +159,16 @@ export function HitCard({ hit, moneyTone }: { hit: ScoutHit; moneyTone?: boolean
               });
             }}
             className={cn(
-              "text-[10px] font-medium border rounded-md px-1.5 py-0.5 inline-flex items-center gap-1 transition-all",
+              "text-[10px] font-medium border rounded-md px-2 py-0.5 inline-flex items-center gap-1 transition-all",
               pushed
-                ? "text-emerald-200 bg-emerald-800/80 border-emerald-400"
-                : "text-emerald-300 hover:text-white bg-emerald-950/40 hover:bg-emerald-900/60 border-emerald-500/30"
+                ? "text-emerald-200 bg-emerald-950/80 border-emerald-500/50"
+                : "text-zinc-400 hover:text-white bg-white/[0.03] hover:bg-white/[0.08] border-white/[0.08]"
             )}
             title="Push to Project Manage"
           >
-            {pushed ? <Check className="size-2.5 text-emerald-300" /> : <FolderKanban className="size-2.5" />}
+            {pushed ? <Check className="size-2.5 text-emerald-400" /> : <FolderKanban className="size-2.5 text-zinc-400" />}
             <span>{pushed ? "Pushed" : "Push"}</span>
           </button>
-          <span className="text-[11px] font-medium text-emerald-400 inline-flex items-center gap-0.5 opacity-90 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all ml-1">
-            Build
-            <Sparkles className="size-3" />
-          </span>
         </div>
       </div>
     </div>

@@ -153,24 +153,16 @@ export function FinderChatbot() {
           }}
           className={cn(
             "fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-40 group",
-            "flex items-center gap-2.5 px-4 py-3 sm:py-2.5 rounded-full",
-            "bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500",
-            "hover:from-emerald-500 hover:to-teal-400 text-white font-semibold text-xs sm:text-sm",
-            "shadow-xl shadow-emerald-950/60 border border-emerald-400/30",
-            "transition-all duration-300 hover:scale-105 active:scale-95"
+            "h-10 px-3.5 rounded-full flex items-center gap-2 shadow-2xl transition-all duration-200",
+            "bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-white/10 hover:border-white/20",
+            "hover:scale-[1.02] active:scale-[0.98] backdrop-blur-xl"
           )}
-          title="Chat with Finder AI Advisor"
-          aria-label="Open Finder AI Advisor"
+          title="Chat with Finder AI"
+          aria-label="Open Finder AI"
         >
-          <div className="relative flex items-center justify-center">
-            <Sparkles className="size-4 animate-pulse text-amber-200" />
-            <span className="absolute -top-1 -right-1 size-2 rounded-full bg-emerald-300 animate-ping" />
-            <span className="absolute -top-1 -right-1 size-2 rounded-full bg-emerald-200" />
-          </div>
-          <span className="tracking-tight font-medium">Ask Finder AI</span>
-          <span className="hidden md:inline text-[10px] uppercase font-mono tracking-wider bg-black/25 px-1.5 py-0.5 rounded-full border border-white/10">
-            Advisor
-          </span>
+          <span className="size-1.5 rounded-full bg-emerald-400" />
+          <span className="text-xs font-medium tracking-tight">Ask Finder AI</span>
+          <span className="text-[10px] font-mono text-zinc-500 pl-0.5">⌘J</span>
         </button>
       )}
 
@@ -178,61 +170,56 @@ export function FinderChatbot() {
       {isOpen && (
         <div
           className={cn(
-            "fixed z-50 transition-all duration-300 flex flex-col shadow-2xl",
-            "border border-emerald-500/30 bg-slate-950/95 backdrop-blur-2xl text-foreground",
+            "fixed z-50 transition-all duration-300 flex flex-col shadow-[0_24px_70px_rgba(0,0,0,0.85)]",
+            "border border-white/[0.08] bg-[#0b0c0f]/95 backdrop-blur-3xl text-zinc-100",
             isMinimized
-              ? "bottom-20 sm:bottom-6 right-4 sm:right-6 w-80 h-14 rounded-2xl overflow-hidden"
-              : "bottom-4 sm:bottom-6 right-2 sm:right-6 w-[calc(100vw-1rem)] sm:w-[440px] h-[calc(100dvh-2rem)] sm:h-[620px] max-h-[700px] rounded-3xl overflow-hidden"
+              ? "bottom-20 sm:bottom-6 right-4 sm:right-6 w-80 h-13 rounded-xl overflow-hidden"
+              : "bottom-4 sm:bottom-6 right-2 sm:right-6 w-[calc(100vw-1rem)] sm:w-[420px] h-[calc(100dvh-2rem)] sm:h-[580px] max-h-[640px] rounded-2xl overflow-hidden"
           )}
         >
           {/* Header Bar */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-border/80 bg-slate-900/90 shrink-0">
-            <div className="flex items-center gap-2.5 min-w-0">
-              <div className="size-8 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow-md shadow-emerald-950/50 shrink-0">
-                <Sparkles className="size-4" />
+          <div className="flex items-center justify-between px-3.5 py-2.5 border-b border-white/[0.06] bg-zinc-900/30 shrink-0">
+            <div className="flex items-center gap-2 min-w-0">
+              <div className="size-6 rounded-md bg-zinc-800 border border-white/10 flex items-center justify-center text-emerald-400 shrink-0">
+                <Sparkles className="size-3" />
               </div>
               <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <h3 className="text-xs sm:text-sm font-bold text-white tracking-tight truncate">
-                    Finder AI Advisor
+                <div className="flex items-center gap-1.5">
+                  <h3 className="text-xs font-semibold text-zinc-200 tracking-tight truncate">
+                    Finder AI
                   </h3>
-                  <span className="size-1.5 rounded-full bg-emerald-400 shrink-0" />
-                  <span className="hidden sm:inline text-[10px] text-emerald-400 font-medium">
-                    Online
-                  </span>
+                  <span className="size-1 rounded-full bg-emerald-400" />
+                  <span className="text-[10px] text-zinc-500 font-mono">Advisor</span>
                 </div>
-                <p className="text-[11px] text-muted truncate">
-                  Grounded strictly in Finder startup ideas
-                </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-1 shrink-0">
+            <div className="flex items-center gap-0.5 shrink-0">
               {messages.length > 0 && !isMinimized && (
                 <button
                   type="button"
                   onClick={handleClear}
-                  className="p-1.5 rounded-lg text-muted hover:text-rose-400 hover:bg-slate-800/80 transition-colors"
+                  className="p-1 rounded-md text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.04] transition-colors"
                   title="Clear conversation"
                 >
-                  <Trash2 className="size-3.5" />
+                  <Trash2 className="size-3" />
                 </button>
               )}
               <button
                 type="button"
                 onClick={() => setIsMinimized((prev) => !prev)}
-                className="p-1.5 rounded-lg text-muted hover:text-white hover:bg-slate-800/80 transition-colors"
+                className="p-1 rounded-md text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.04] transition-colors"
                 title={isMinimized ? "Expand" : "Minimize"}
               >
-                {isMinimized ? <Maximize2 className="size-3.5" /> : <Minimize2 className="size-3.5" />}
+                {isMinimized ? <Maximize2 className="size-3" /> : <Minimize2 className="size-3" />}
               </button>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 rounded-lg text-muted hover:text-white hover:bg-slate-800/80 transition-colors"
+                className="p-1 rounded-md text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.04] transition-colors"
                 title="Close chat"
               >
-                <X className="size-4" />
+                <X className="size-3.5" />
               </button>
             </div>
           </div>
@@ -241,53 +228,49 @@ export function FinderChatbot() {
             <>
               {/* Context Banner if on an idea page */}
               {ideaContext && ideaContext.name && (
-                <div className="bg-emerald-950/40 border-b border-emerald-500/20 px-3.5 py-1.5 flex items-center justify-between text-xs text-emerald-300 shrink-0">
+                <div className="bg-white/[0.02] border-b border-white/[0.05] px-3.5 py-1.5 flex items-center justify-between text-xs text-zinc-300 shrink-0">
                   <div className="flex items-center gap-1.5 truncate">
-                    <Compass className="size-3 shrink-0 text-emerald-400" />
-                    <span className="text-muted-foreground text-[11px]">Discussing:</span>
-                    <span className="font-semibold truncate">{ideaContext.name}</span>
+                    <Compass className="size-3 shrink-0 text-zinc-500" />
+                    <span className="text-zinc-500 text-[10px] font-mono">CONTEXT:</span>
+                    <span className="font-medium text-xs truncate text-zinc-200">{ideaContext.name}</span>
                   </div>
-                  <span className="text-[10px] uppercase font-mono px-1.5 py-0.2 rounded bg-emerald-900/60 text-emerald-300 border border-emerald-500/30">
+                  <span className="text-[9px] uppercase font-mono px-1 py-0.2 rounded bg-white/[0.05] text-zinc-400 border border-white/[0.08]">
                     {ideaContext.kind}
                   </span>
                 </div>
               )}
 
               {/* Chat Message Stream */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-4 text-xs sm:text-sm">
+              <div className="flex-1 overflow-y-auto p-3.5 space-y-3.5 text-xs sm:text-[13px]">
                 {messages.length === 0 ? (
-                  <div className="py-4 space-y-4">
+                  <div className="py-2 space-y-3">
                     {/* Welcome Card */}
-                    <div className="rounded-2xl border border-emerald-500/30 bg-emerald-950/20 p-4 space-y-2">
-                      <div className="flex items-center gap-2 text-emerald-400 font-semibold text-xs">
-                        <Bot className="size-4" />
-                        <span>Welcome to Finder Intelligence</span>
+                    <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 space-y-1.5">
+                      <div className="flex items-center gap-1.5 text-zinc-200 font-medium text-xs">
+                        <Bot className="size-3.5 text-emerald-400" />
+                        <span>Startup Intelligence Advisor</span>
                       </div>
-                      <p className="text-xs text-muted-foreground leading-relaxed">
-                        I am your resident startup intelligence advisor. I have full knowledge of all{" "}
-                        <strong className="text-foreground">13 Opportunity Desks</strong>, verified MRRs,
-                        1-star complaint breakdowns, and vibe-coding blueprints.
-                      </p>
-                      <p className="text-xs text-muted leading-relaxed">
-                        Ask me what to build, which idea is most profitable, or how to launch!
+                      <p className="text-xs text-zinc-400 leading-relaxed">
+                        Grounded in all <span className="text-zinc-200">13 Opportunity Desks</span>, verified MRR metrics,
+                        1-star review flanks, and developer launch blueprints.
                       </p>
                     </div>
 
                     {/* Starter Prompts */}
-                    <div className="space-y-1.5 pt-2">
-                      <p className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground font-semibold px-1">
-                        Suggested questions:
+                    <div className="space-y-1 pt-1">
+                      <p className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 px-1">
+                        Suggested prompts:
                       </p>
-                      <div className="flex flex-col gap-1.5">
+                      <div className="flex flex-col gap-1">
                         {STARTER_PROMPTS.map((prompt) => (
                           <button
                             key={prompt}
                             type="button"
                             onClick={() => handleSend(prompt)}
-                            className="text-left text-xs bg-slate-900 hover:bg-slate-800 border border-border/80 hover:border-emerald-500/40 text-foreground/90 hover:text-white rounded-xl px-3 py-2 transition-all group flex items-center justify-between"
+                            className="text-left text-xs bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.05] hover:border-white/[0.12] text-zinc-300 hover:text-white rounded-lg px-2.5 py-2 transition-all flex items-center justify-between"
                           >
                             <span>{prompt}</span>
-                            <CornerDownLeft className="size-3 opacity-0 group-hover:opacity-70 text-emerald-400 shrink-0 ml-1.5" />
+                            <CornerDownLeft className="size-3 opacity-40 text-zinc-500 shrink-0 ml-1.5" />
                           </button>
                         ))}
                       </div>
@@ -299,21 +282,21 @@ export function FinderChatbot() {
                       <div
                         key={idx}
                         className={cn(
-                          "flex gap-2.5",
+                          "flex gap-2",
                           msg.role === "user" ? "justify-end" : "justify-start"
                         )}
                       >
                         {msg.role === "assistant" && (
-                          <div className="size-6 rounded-lg bg-emerald-600/30 border border-emerald-500/30 flex items-center justify-center text-emerald-300 shrink-0 mt-0.5">
-                            <Sparkles className="size-3" />
+                          <div className="size-5 rounded-md bg-zinc-800 border border-white/10 flex items-center justify-center text-emerald-400 shrink-0 mt-0.5">
+                            <Sparkles className="size-2.5" />
                           </div>
                         )}
                         <div
                           className={cn(
-                            "rounded-2xl px-3.5 py-2.5 max-w-[85%] leading-relaxed text-xs sm:text-sm",
+                            "rounded-xl px-3 py-2 max-w-[88%] leading-relaxed text-xs sm:text-[13px]",
                             msg.role === "user"
-                              ? "bg-emerald-600 text-white rounded-br-xs font-medium shadow-md shadow-emerald-950/40"
-                              : "bg-slate-900 border border-border/90 text-foreground rounded-bl-xs shadow-sm"
+                              ? "bg-zinc-800 text-zinc-100 rounded-br-xs font-normal border border-white/[0.08]"
+                              : "bg-white/[0.025] border border-white/[0.06] text-zinc-200 rounded-bl-xs"
                           )}
                         >
                           <ChatMessageContent content={msg.content} onLinkClick={() => setIsOpen(false)} />
@@ -323,12 +306,12 @@ export function FinderChatbot() {
 
                     {/* Loading bubble */}
                     {loading && (
-                      <div className="flex gap-2.5 justify-start">
-                        <div className="size-6 rounded-lg bg-emerald-600/30 border border-emerald-500/30 flex items-center justify-center text-emerald-300 shrink-0 mt-0.5">
-                          <Sparkles className="size-3 animate-spin" />
+                      <div className="flex gap-2 justify-start">
+                        <div className="size-5 rounded-md bg-zinc-800 border border-white/10 flex items-center justify-center text-emerald-400 shrink-0 mt-0.5">
+                          <Sparkles className="size-2.5 animate-spin" />
                         </div>
-                        <div className="rounded-2xl rounded-bl-xs px-3.5 py-2.5 bg-slate-900 border border-border text-muted flex items-center gap-2 text-xs">
-                          <span className="size-1.5 rounded-full bg-emerald-400 animate-ping" />
+                        <div className="rounded-xl rounded-bl-xs px-3 py-2 bg-white/[0.02] border border-white/[0.05] text-zinc-400 flex items-center gap-2 text-xs">
+                          <span className="size-1 rounded-full bg-emerald-400 animate-ping" />
                           <span>Consulting Finder catalog...</span>
                         </div>
                       </div>
@@ -340,13 +323,13 @@ export function FinderChatbot() {
 
               {/* Follow-up Quick Chips */}
               {messages.length > 0 && suggestions.length > 0 && !loading && (
-                <div className="px-3 py-1.5 border-t border-border/50 bg-slate-950 flex flex-wrap gap-1.5 shrink-0">
+                <div className="px-3 py-1.5 border-t border-white/[0.05] bg-zinc-950 flex flex-wrap gap-1.5 shrink-0">
                   {suggestions.map((s) => (
                     <button
                       key={s}
                       type="button"
                       onClick={() => handleSend(s)}
-                      className="text-[11px] bg-slate-900 hover:bg-slate-800 border border-border hover:border-emerald-500/40 text-muted hover:text-white rounded-full px-2.5 py-1 transition-all"
+                      className="text-[10px] bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] text-zinc-400 hover:text-white rounded-full px-2.5 py-0.5 transition-all"
                     >
                       {s}
                     </button>
@@ -355,13 +338,13 @@ export function FinderChatbot() {
               )}
 
               {/* Input Form */}
-              <div className="p-3 border-t border-border/80 bg-slate-900/90 shrink-0">
+              <div className="p-2.5 border-t border-white/[0.06] bg-zinc-950/80 shrink-0">
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
                     void handleSend();
                   }}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-1.5"
                 >
                   <input
                     ref={inputRef}
@@ -374,25 +357,25 @@ export function FinderChatbot() {
                         : "Ask about app ideas, MRR, solo build..."
                     }
                     disabled={loading}
-                    className="flex-1 bg-slate-950 border border-border rounded-xl px-3.5 py-2 text-xs sm:text-sm text-foreground placeholder:text-muted focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/40 transition-all"
+                    className="flex-1 bg-zinc-900/60 border border-white/[0.08] focus:border-white/20 rounded-lg px-3 py-1.5 text-xs text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-all"
                   />
                   <button
                     type="submit"
                     disabled={!input.trim() || loading}
                     className={cn(
-                      "size-9 rounded-xl flex items-center justify-center transition-all shrink-0",
+                      "size-8 rounded-lg flex items-center justify-center transition-all shrink-0",
                       input.trim() && !loading
-                        ? "bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-950/50"
-                        : "bg-slate-800 text-muted cursor-not-allowed"
+                        ? "bg-zinc-100 hover:bg-white text-zinc-950"
+                        : "bg-zinc-800 text-zinc-600 cursor-not-allowed"
                     )}
                     title="Send message"
                   >
-                    <Send className="size-3.5" />
+                    <Send className="size-3" />
                   </button>
                 </form>
-                <div className="mt-1.5 flex items-center justify-between px-1 text-[10px] text-faint">
-                  <span>Grounded in Finder database</span>
-                  <span>Shift+Enter or Enter to send</span>
+                <div className="mt-1 flex items-center justify-between px-1 text-[9px] text-zinc-500 font-mono">
+                  <span>Grounded in Finder catalog</span>
+                  <span>Enter to send</span>
                 </div>
               </div>
             </>
