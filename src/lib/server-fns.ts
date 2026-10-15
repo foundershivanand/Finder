@@ -9,6 +9,7 @@ import { loadRedditFeed, loadRedditProfile } from "./reddit.server";
 import { fetchWebsiteText, gatherReviews, reviewsFromWebsite } from "./reviews.server";
 import { loadScoutFeed, loadStartupProfile } from "./trustmrr.server";
 import { pushIdeaToProjectHub, type PushToHubInput, type PushToHubResult } from "./project-hub.server";
+import { askAdvisor, type ChatAdvisorResult, type ChatMessage, type CurrentIdeaContext } from "./advisor-chat.server";
 import type { DeskKind, GenerateResult, ProductDossier, RiposteBrief, ScoutHit } from "./types";
 import { generateRiposteBrief } from "./xai.server";
 
@@ -166,4 +167,37 @@ export const pushToProjectManage = createServerFn({ method: "POST" })
   .handler(async ({ data }): Promise<PushToHubResult> => {
     return pushIdeaToProjectHub(data);
   });
+
+export const chatWithAdvisor = createServerFn({ method: "POST" })
+  .validator((input: unknown): { messages: ChatMessage[]; context?: CurrentIdeaContext } => {
+    if (!input || typeof input !== "object") {
+      throw new Error("Invalid payload");
+    }
+    const r = input as Record<string, unknown>;
+    const rawMsgs = Array.isArray(r.messages) ? r.messages : [];
+    const messages: ChatMessage[] = rawMsgs.map((m: any) => ({
+      role: m.role === "assistant" ? "assistant" : m.role === "system" ? "system" : "user",
+      content: String(m.content || "").slice(0, 3000),
+    }));
+
+    const rawCtx = r.context as Record<string, unknown> | undefined;
+    const context: CurrentIdeaContext | undefined = rawCtx
+      ? {
+          id: typeof rawCtx.id === "string" ? rawCtx.id : undefined,
+          kind: typeof rawCtx.kind === "string" ? rawCtx.kind : undefined,
+          name: typeof rawCtx.name === "string" ? rawCtx.name : undefined,
+          description: typeof rawCtx.description === "string" ? rawCtx.description : undefined,
+          tag: typeof rawCtx.tag === "string" ? rawCtx.tag : undefined,
+          category: typeof rawCtx.category === "string" ? rawCtx.category : undefined,
+          mrr: typeof rawCtx.mrr === "number" ? rawCtx.mrr : undefined,
+          url: typeof rawCtx.url === "string" ? rawCtx.url : undefined,
+        }
+      : undefined;
+
+    return { messages, context };
+  })
+  .handler(async ({ data }): Promise<ChatAdvisorResult> => {
+    return askAdvisor(data.messages, data.context);
+  });
+
 
