@@ -26,6 +26,9 @@ export interface ChatAdvisorResult {
   suggestions: string[];
 }
 
+const GEMINI_DEFAULT_KEY =
+  "AQ.Ab8RN6LAfvTPYRY4M327Eq9_I4KECJpIDIIcoIGgnhS1ikHA6w";
+const GEMINI_PROJECT_ID = "353088419729";
 const OPENROUTER_DEFAULT_KEY =
   "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";
 
@@ -169,6 +172,85 @@ STRICT GUARDRAILS & INSTRUCTIONS:
 7. Tone: Sharp, pragmatic, encouraging, and focused on indie hacker execution. Use bullet points and bold text for readability.`;
 }
 
+async function callGoogleGemini(
+  systemPrompt: string,
+  messages: ChatMessage[],
+  apiKey: string
+): Promise<string | null> {
+  const geminiModels = [
+    "gemini-3.5-flash-lite",
+    "gemini-3.8-flash",
+    "gemini-3.1-flash-lite",
+    "gemini-flash-lite-latest",
+  ];
+
+  // Convert ChatMessage[] to Gemini contents
+  const contents: Array<{ role: "user" | "model"; parts: Array<{ text: string }> }> = [];
+  for (const m of messages.slice(-8)) {
+    const role: "user" | "model" = m.role === "assistant" ? "model" : "user";
+    if (contents.length > 0 && contents[contents.length - 1].role === role) {
+      contents[contents.length - 1].parts[0].text += "\n" + m.content;
+    } else {
+      contents.push({ role, parts: [{ text: m.content }] });
+    }
+  }
+
+  // Gemini contents must begin with a user turn
+  while (contents.length > 0 && contents[0].role !== "user") {
+    contents.shift();
+  }
+  if (contents.length === 0) {
+    contents.push({ role: "user", parts: [{ text: "Hello Finder AI" }] });
+  }
+
+  const payload = {
+    system_instruction: {
+      parts: [{ text: systemPrompt }],
+    },
+    contents,
+    generationConfig: {
+      maxOutputTokens: 850,
+      temperature: 0.45,
+    },
+  };
+
+  for (const model of geminiModels) {
+    try {
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-goog-api-key": apiKey,
+          },
+          body: JSON.stringify(payload),
+          signal: AbortSignal.timeout(10_000),
+        }
+      );
+
+      if (res.ok) {
+        const data = (await res.json()) as {
+          candidates?: Array<{
+            content?: { parts?: Array<{ text?: string }> };
+          }>;
+        };
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+        if (text) {
+          return text;
+        }
+      } else {
+        const errText = await res.text();
+        console.warn(`[callGoogleGemini] ${model} HTTP ${res.status}:`, errText.slice(0, 140));
+      }
+    } catch (err) {
+      console.warn(`[callGoogleGemini] ${model} error:`, err);
+    }
+  }
+
+  return null;
+}
+
 export async function askAdvisor(
   messages: ChatMessage[],
   context?: CurrentIdeaContext
@@ -176,30 +258,41 @@ export async function askAdvisor(
   const catalog = await getFinderCatalogSummary();
   const systemPrompt = buildSystemPrompt(catalog, context);
 
-  const key =
-    process.env.OPENROUTER_API_KEY ||
-    process.env.GEMINI_API_KEY ||
-    OPENROUTER_DEFAULT_KEY;
+  const geminiKey = process.env.GEMINI_API_KEY || GEMINI_DEFAULT_KEY;
 
-  // Prepare messages payload
+  // 1. Try Google Gemini API directly using user-provided key
+  if (geminiKey) {
+    const geminiReply = await callGoogleGemini(systemPrompt, messages, geminiKey);
+    if (geminiReply) {
+      return {
+        ok: true,
+        reply: geminiReply,
+        suggestions: generateContextualSuggestions(geminiReply, context),
+      };
+    }
+  }
+
+  // 2. Failover to OpenRouter if Gemini API is unreachable
+  const openRouterKey =
+    process.env.OPENROUTER_API_KEY || OPENROUTER_DEFAULT_KEY;
+
   const apiMessages = [
     { role: "system", content: systemPrompt },
-    ...messages.slice(-8), // keep last 8 messages for context window
+    ...messages.slice(-8),
   ];
 
-  // Try OpenRouter with Gemini 2.5 Flash first, then Llama 3.1 8B as fallback
-  const models = [
+  const fallbackModels = [
     "google/gemini-2.5-flash",
     "meta-llama/llama-3.1-8b-instruct",
   ];
 
-  for (const model of models) {
+  for (const model of fallbackModels) {
     try {
       const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${key}`,
+          Authorization: `Bearer ${openRouterKey}`,
           "HTTP-Referer": "https://finder-d17.pages.dev",
           "X-Title": "Finder AI Advisor",
         },
@@ -224,16 +317,13 @@ export async function askAdvisor(
             suggestions: generateContextualSuggestions(content, context),
           };
         }
-      } else {
-        const errorText = await res.text();
-        console.warn(`[askAdvisor] Model ${model} returned ${res.status}:`, errorText.slice(0, 160));
       }
     } catch (modelErr) {
-      console.warn(`[askAdvisor] Model ${model} failed:`, modelErr);
+      console.warn(`[askAdvisor] Fallback ${model} failed:`, modelErr);
     }
   }
 
-  // Graceful local fallback if external AI APIs are blocked or timing out
+  // 3. Graceful local fallback if all external AI APIs are blocked
   const lastUserMsg = messages[messages.length - 1]?.content || "";
   const localReply = generateLocalAdvisorResponse(lastUserMsg, context);
 
