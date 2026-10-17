@@ -253,13 +253,13 @@ export function PlanSections({ brief }: { brief: RiposteBrief }) {
               <Kicker>Product Factories & Pre-Built Modules</Kicker>
             </div>
             <h3 className="mt-1 text-base sm:text-lg font-semibold tracking-tight text-foreground">
-              Accelerate with 5 Product Factories & Modules
+              Accelerate with 6 Product Factories & Modules
             </h3>
             <p className="mt-1 text-xs text-muted leading-relaxed">
-              Explore 196+ battle-tested modules across Product Hub, Bots Factory, AI Agent Factory, Mobile Factory, and Web Code Library.
+              Explore 196+ battle-tested modules across Product Hub, Bots Factory, AI Agent Factory, Mobile Factory, Web Code Library, and AI Mentor OS.
             </p>
           </div>
-          <AllLinksButton label="All Links (5 Hubs)" />
+          <AllLinksButton label="All Links (6 Hubs)" />
         </div>
       </section>
 

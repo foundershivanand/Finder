@@ -1,4 +1,5 @@
 import { Layers } from "lucide-react";
+import { ALL_ECOSYSTEM_LINKS } from "@/lib/all-links-data";
 import { useAllLinksModal } from "@/lib/all-links-store";
 import { cn } from "@/lib/utils";
 
@@ -12,6 +13,7 @@ export function AllLinksButton({
   label?: string;
 }) {
   const { open } = useAllLinksModal();
+  const count = ALL_ECOSYSTEM_LINKS.length;
 
   if (variant === "pill") {
     return (
@@ -22,7 +24,7 @@ export function AllLinksButton({
           "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono tracking-wide bg-emerald-500/[0.06] hover:bg-emerald-500/[0.14] text-emerald-300 border border-emerald-500/20 transition-all cursor-pointer group shadow-sm",
           className
         )}
-        title="View All 5 Ecosystem Links & Factories"
+        title={`View All ${count} Ecosystem Links & Factories`}
       >
         <Layers className="size-3 text-emerald-400 group-hover:rotate-6 transition-transform" />
         <span>{label}</span>
@@ -40,7 +42,7 @@ export function AllLinksButton({
           "text-zinc-400 hover:text-white transition-colors inline-flex items-center gap-1 cursor-pointer",
           className
         )}
-        title="View All 5 Ecosystem Links"
+        title={`View All ${count} Ecosystem Links`}
       >
         <span>{label}</span>
       </button>
@@ -60,7 +62,7 @@ export function AllLinksButton({
       <Layers className="size-3.5 text-emerald-400 group-hover:scale-105 transition-transform" />
       <span>{label}</span>
       <span className="px-1 py-0.2 rounded text-[9px] font-mono bg-white/[0.06] text-zinc-400 group-hover:text-emerald-300">
-        5
+        {count}
       </span>
     </button>
   );

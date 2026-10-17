@@ -9,6 +9,7 @@ import {
   Layers,
   Smartphone,
   Sparkles,
+  Swords,
   X,
 } from "lucide-react";
 import { ALL_ECOSYSTEM_LINKS, type EcosystemLinkItem } from "@/lib/all-links-data";
@@ -28,6 +29,8 @@ function renderLinkIcon(name: EcosystemLinkItem["iconName"]) {
       return <Smartphone className="size-5 text-emerald-400" />;
     case "Boxes":
       return <Boxes className="size-5 text-emerald-400" />;
+    case "Swords":
+      return <Swords className="size-5 text-emerald-400" />;
     default:
       return <Layers className="size-5 text-emerald-400" />;
   }

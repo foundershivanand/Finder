@@ -19,14 +19,14 @@ export function AppFooter() {
                 <span>Product Factories & Ecosystem</span>
               </div>
               <h3 className="mt-2 text-base sm:text-lg font-semibold tracking-tight text-white">
-                5 Product Factories & Launch Operating Systems
+                6 Product Factories & Launch Operating Systems
               </h3>
               <p className="mt-1 text-xs text-zinc-400 leading-relaxed">
-                Connect your ideas directly to our full suite: Product Hub (817 launch tasks), Bots Product Factory, AI Agent Factory, Mobile Factory, and the Reusable Code Library.
+                Connect your ideas directly to our full suite: Product Hub (817 launch tasks), Bots Product Factory, AI Agent Factory, Mobile Factory, Reusable Code Library, and the AI Mentor OS.
               </p>
               <div className="mt-3 flex flex-wrap items-center gap-2 text-[10px] font-mono text-zinc-500">
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/[0.02] border border-white/[0.05]">
-                  <CheckCircle2 className="size-2.5 text-emerald-400" /> 5 Live Hubs
+                  <CheckCircle2 className="size-2.5 text-emerald-400" /> 6 Live Hubs
                 </span>
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/[0.02] border border-white/[0.05]">
                   <Sparkles className="size-2.5 text-emerald-400" /> 196+ Total Modules
@@ -44,7 +44,7 @@ export function AppFooter() {
                 className="h-9 px-4 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 font-medium text-xs shadow-sm cursor-pointer"
               >
                 <Layers className="size-3.5 mr-1.5 text-zinc-950" />
-                <span>All Links (5 Hubs)</span>
+                <span>All Links (6 Hubs)</span>
               </Button>
             </div>
           </div>

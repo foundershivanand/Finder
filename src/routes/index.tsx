@@ -354,7 +354,7 @@ function Hero({ desk, count }: { desk: DeskKind; count: number }) {
           <span>{copy.badge}</span>
         </div>
 
-        <AllLinksButton variant="pill" label="All Links (5 Hubs)" />
+        <AllLinksButton variant="pill" label="All Links (6 Hubs)" />
       </div>
 
       <h1 className="mt-3.5 max-w-3xl text-2xl sm:text-4xl lg:text-[42px] font-semibold tracking-tight text-white leading-[1.15]">

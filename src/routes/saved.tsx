@@ -81,12 +81,12 @@ function SavedPage() {
           <div className="flex items-center gap-2.5">
             <Layers className="size-4 text-emerald-400 shrink-0" />
             <span className="text-zinc-300 text-xs leading-relaxed">
-              Ready to execute? Access all 5 product factories and launch operating systems in{" "}
+              Ready to execute? Access all 6 product factories and launch operating systems in{" "}
               <strong className="text-white font-medium">All Links</strong>.
             </span>
           </div>
           <div className="flex items-center gap-2 shrink-0">
-            <AllLinksButton label="All Links (5 Hubs)" />
+            <AllLinksButton label="All Links (6 Hubs)" />
           </div>
         </div>
 

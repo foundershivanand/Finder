@@ -5,7 +5,7 @@ export interface EcosystemLinkItem {
   tagline: string;
   description: string;
   url: string;
-  iconName: "FolderKanban" | "Bot" | "Cpu" | "Smartphone" | "Boxes";
+  iconName: "FolderKanban" | "Bot" | "Cpu" | "Smartphone" | "Boxes" | "Swords";
   stats: string;
 }
 
@@ -59,5 +59,15 @@ export const ALL_ECOSYSTEM_LINKS: EcosystemLinkItem[] = [
     url: "https://reusable-library.foundershivanand.workers.dev/",
     iconName: "Boxes",
     stats: "33 Modules • AI Agent Ready",
+  },
+  {
+    id: "mentor-api",
+    title: "AI Mentor OS",
+    badge: "Mentor OS",
+    tagline: "Ruthless Socratic Sparring & 15 Skills",
+    description: "Adversarial practice arena, 15-skill mastery taxonomy, vocal defense grading, training debt ledger, and physical reality mode operations.",
+    url: "https://mentor-api.foundershivanand.workers.dev/",
+    iconName: "Swords",
+    stats: "15 Skills • Voice Sparring • Turso Sync",
   },
 ];

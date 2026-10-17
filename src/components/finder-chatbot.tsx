@@ -214,7 +214,7 @@ export function FinderChatbot() {
                 type="button"
                 onClick={openAllLinks}
                 className="p-1 rounded-md text-zinc-500 hover:text-emerald-400 hover:bg-white/[0.04] transition-colors cursor-pointer"
-                title="All Ecosystem Links (5 Hubs)"
+                title="All Ecosystem Links (6 Hubs)"
               >
                 <Layers className="size-3" />
               </button>

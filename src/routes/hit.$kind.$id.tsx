@@ -323,7 +323,7 @@ function HitPage() {
             type="button"
             onClick={openAllLinks}
             className="h-10 px-2.5 rounded-lg border border-border bg-card hover:bg-card-2 text-zinc-300 inline-flex items-center justify-center shrink-0 cursor-pointer"
-            title="All Ecosystem Links (5 Hubs)"
+            title="All Ecosystem Links (6 Hubs)"
           >
             <Layers className="size-4 text-emerald-400" />
           </button>
