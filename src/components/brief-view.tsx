@@ -1,5 +1,6 @@
-import { Boxes, Check, Copy, Download, ExternalLink, FileCode, FolderKanban, Layers, ShieldCheck, Sparkles, Terminal } from "lucide-react";
+import { Check, Copy, Download, ExternalLink, FileCode, FolderKanban, Layers, ShieldCheck, Sparkles, Terminal } from "lucide-react";
 import { useState } from "react";
+import { AllLinksButton } from "@/components/all-links-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { pushIdeaToProjectManage } from "@/lib/project-manage";
@@ -243,37 +244,22 @@ export function PlanSections({ brief }: { brief: RiposteBrief }) {
         </div>
       </section>
 
-      {/* Reusable Code Library Integration */}
+      {/* Product Factories & Ecosystem Integration */}
       <section className="rounded-2xl border border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.03] p-5 sm:p-6 transition-all">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="max-w-xl">
             <div className="flex items-center gap-1.5 text-emerald-400">
-              <Boxes className="size-3.5" />
-              <Kicker>Pre-Built Modules</Kicker>
+              <Layers className="size-3.5" />
+              <Kicker>Product Factories & Pre-Built Modules</Kicker>
             </div>
             <h3 className="mt-1 text-base sm:text-lg font-semibold tracking-tight text-foreground">
-              Pull from Reusable Code Library
+              Accelerate with 5 Product Factories & Modules
             </h3>
             <p className="mt-1 text-xs text-muted leading-relaxed">
-              33 enterprise-grade, battle-tested software modules (OAuth, Stripe payments, Turso DB, rate limiting, audit logs) ready for AI agents to discover, pull, and integrate directly into this build.
+              Explore 196+ battle-tested modules across Product Hub, Bots Factory, AI Agent Factory, Mobile Factory, and Web Code Library.
             </p>
           </div>
-          <Button
-            asChild
-            size="sm"
-            className="h-9 px-4 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 font-medium text-xs shrink-0 shadow-sm"
-          >
-            <a
-              href="https://reusable-library.foundershivanand.workers.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5"
-            >
-              <Boxes className="size-3.5" />
-              <span>Browse 33 Modules</span>
-              <ExternalLink className="size-3 opacity-60" />
-            </a>
-          </Button>
+          <AllLinksButton label="All Links (5 Hubs)" />
         </div>
       </section>
 

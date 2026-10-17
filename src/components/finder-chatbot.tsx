@@ -9,6 +9,7 @@ import {
   CornerDownLeft,
   ExternalLink,
   FolderKanban,
+  Layers,
   Maximize2,
   Minimize2,
   RefreshCw,
@@ -20,6 +21,7 @@ import {
 } from "lucide-react";
 import { chatWithAdvisor } from "@/lib/server-fns";
 import type { ChatMessage, CurrentIdeaContext } from "@/lib/advisor-chat.server";
+import { useAllLinksModal } from "@/lib/all-links-store";
 import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "finder_chat_messages_v1";
@@ -40,6 +42,7 @@ export function FinderChatbot() {
   const [loading, setLoading] = useState(false);
   const [suggestions, setSuggestions] = useState<string[]>(STARTER_PROMPTS.slice(0, 3));
   const location = useLocation();
+  const { open: openAllLinks } = useAllLinksModal();
 
   const [messages, setMessages] = useState<ChatMessage[]>(() => {
     if (typeof window === "undefined") return [];
@@ -207,15 +210,14 @@ export function FinderChatbot() {
                   <Trash2 className="size-3" />
                 </button>
               )}
-              <a
-                href="https://reusable-library.foundershivanand.workers.dev/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-1 rounded-md text-zinc-500 hover:text-emerald-400 hover:bg-white/[0.04] transition-colors"
-                title="Open Reusable Code Library (33 modules)"
+              <button
+                type="button"
+                onClick={openAllLinks}
+                className="p-1 rounded-md text-zinc-500 hover:text-emerald-400 hover:bg-white/[0.04] transition-colors cursor-pointer"
+                title="All Ecosystem Links (5 Hubs)"
               >
-                <Boxes className="size-3" />
-              </a>
+                <Layers className="size-3" />
+              </button>
               <button
                 type="button"
                 onClick={() => setIsMinimized((prev) => !prev)}

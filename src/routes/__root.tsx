@@ -4,6 +4,7 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { PwaMobileBanner } from "@/components/pwa-install";
 import { FinderChatbot } from "@/components/finder-chatbot";
+import { AllLinksModal } from "@/components/all-links-modal";
 import appCss from "../styles.css?url";
 
 const APP_NAME = "Finder — Startup & App Ideas";
@@ -62,6 +63,7 @@ function RootComponent() {
           <Outlet />
           <PwaMobileBanner />
           <FinderChatbot />
+          <AllLinksModal />
         </AuthProvider>
         <Scripts />
       </body>

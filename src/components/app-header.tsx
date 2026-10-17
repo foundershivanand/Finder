@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Bookmark, Boxes, Compass, ExternalLink, FolderKanban, Sparkles } from "lucide-react";
+import { Bookmark, Compass } from "lucide-react";
 import { useEffect, useState } from "react";
+import { AllLinksButton } from "@/components/all-links-button";
 import { PwaInstallButton } from "@/components/pwa-install";
 import { listSavedBriefs } from "@/lib/saved-briefs";
 import { cn } from "@/lib/utils";
@@ -67,29 +68,7 @@ export function AppHeader({ className }: { className?: string }) {
             ) : null}
           </Link>
 
-          <a
-            href="https://project-manage-z6u.pages.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex h-8 items-center gap-1.5 px-2.5 text-xs font-medium text-zinc-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] rounded-md transition-all"
-            title="Product Hub — 96 Projects & Master Launch OS"
-          >
-            <FolderKanban className="size-3.5 text-emerald-400" />
-            <span>Product Hub</span>
-            <ExternalLink className="size-3 text-zinc-500 group-hover:text-zinc-300" />
-          </a>
-
-          <a
-            href="https://reusable-library.foundershivanand.workers.dev/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex h-8 items-center gap-1.5 px-2.5 text-xs font-medium text-zinc-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] rounded-md transition-all"
-            title="Reusable Code Library — 33 Pre-built Production Modules for AI Agents & Founders"
-          >
-            <Boxes className="size-3.5 text-emerald-400" />
-            <span>Code Library</span>
-            <ExternalLink className="size-3 text-zinc-500 group-hover:text-zinc-300" />
-          </a>
+          <AllLinksButton />
 
           <PwaInstallButton />
         </nav>

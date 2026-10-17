@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { ArrowRight, Boxes, Compass, Download, ExternalLink, Filter, Flame, Layers, Search, Sparkles, X } from "lucide-react";
+import { ArrowRight, Compass, Download, Filter, Flame, Layers, Search, Sparkles, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
+import { AllLinksButton } from "@/components/all-links-button";
 import { AppFooter } from "@/components/app-footer";
 import { AppHeader } from "@/components/app-header";
 import { PlatformIcon } from "@/components/platform-icons";
@@ -353,17 +354,7 @@ function Hero({ desk, count }: { desk: DeskKind; count: number }) {
           <span>{copy.badge}</span>
         </div>
 
-        <a
-          href="https://reusable-library.foundershivanand.workers.dev/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono tracking-wide bg-emerald-500/[0.05] hover:bg-emerald-500/[0.12] text-emerald-300 border border-emerald-500/20 transition-all group"
-          title="Personal Product Factory — 33 Reusable Code Modules ready for AI agents"
-        >
-          <Boxes className="size-3 text-emerald-400" />
-          <span>33 Reusable Modules</span>
-          <ExternalLink className="size-2.5 opacity-60 group-hover:opacity-100 transition-opacity" />
-        </a>
+        <AllLinksButton variant="pill" label="All Links (5 Hubs)" />
       </div>
 
       <h1 className="mt-3.5 max-w-3xl text-2xl sm:text-4xl lg:text-[42px] font-semibold tracking-tight text-white leading-[1.15]">

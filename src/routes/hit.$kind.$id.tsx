@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Bookmark, BookmarkCheck, Boxes, Check, Download, ExternalLink, FolderKanban, ListOrdered, LoaderCircle, RefreshCw, Sparkles } from "lucide-react";
+import { ArrowLeft, Bookmark, BookmarkCheck, Check, Download, ExternalLink, FolderKanban, Layers, ListOrdered, LoaderCircle, RefreshCw, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
+import { AllLinksButton } from "@/components/all-links-button";
+import { useAllLinksModal } from "@/lib/all-links-store";
 import { AppFooter } from "@/components/app-footer";
 import { AppHeader } from "@/components/app-header";
 import { BriefView, CopyButton, PlanSections } from "@/components/brief-view";
@@ -58,6 +60,7 @@ function HitPage() {
   const [iconBroken, setIconBroken] = useState(false);
   const [warning, setWarning] = useState<string | null>(null);
   const [pushed, setPushed] = useState(false);
+  const { open: openAllLinks } = useAllLinksModal();
 
   useEffect(() => {
     const existing = getSavedBrief(dossier.brief.slug);
@@ -238,24 +241,7 @@ function HitPage() {
                 {pushed ? <Check className="size-3.5 mr-1.5 text-emerald-200" /> : <FolderKanban className="size-3.5 mr-1.5" />}
                 <span>{pushed ? "Pushed to Project Manage!" : "Push to Project Manage"}</span>
               </Button>
-              <Button
-                asChild
-                size="sm"
-                variant="outline"
-                className="h-9 px-3 text-xs border-border bg-card hover:bg-card-2 text-zinc-300 hover:text-white"
-                title="Open Reusable Code Library for pre-built modules"
-              >
-                <a
-                  href="https://reusable-library.foundershivanand.workers.dev/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5"
-                >
-                  <Boxes className="size-3.5 text-emerald-400" />
-                  <span>Modules</span>
-                  <ExternalLink className="size-2.5 opacity-60" />
-                </a>
-              </Button>
+              <AllLinksButton />
               {planReady ? (
                 <>
                   <Button
@@ -333,22 +319,14 @@ function HitPage() {
             {pushed ? <Check className="size-4 mr-1 text-emerald-200" /> : <FolderKanban className="size-4 mr-1" />}
             <span>{pushed ? "Pushed" : "Build"}</span>
           </Button>
-          <Button
-            asChild
-            size="sm"
-            variant="outline"
-            className="h-10 px-2.5 border-border bg-card text-zinc-300 shrink-0"
-            title="Reusable Code Library"
+          <button
+            type="button"
+            onClick={openAllLinks}
+            className="h-10 px-2.5 rounded-lg border border-border bg-card hover:bg-card-2 text-zinc-300 inline-flex items-center justify-center shrink-0 cursor-pointer"
+            title="All Ecosystem Links (5 Hubs)"
           >
-            <a
-              href="https://reusable-library.foundershivanand.workers.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center"
-            >
-              <Boxes className="size-4 text-emerald-400" />
-            </a>
-          </Button>
+            <Layers className="size-4 text-emerald-400" />
+          </button>
           {planReady ? (
             <Button type="button" variant="outline" size="sm" className="h-10 px-3 border-border" onClick={toggleSave}>
               {saved ? <BookmarkCheck className="size-4 text-emerald-400" /> : <Bookmark className="size-4" />}
