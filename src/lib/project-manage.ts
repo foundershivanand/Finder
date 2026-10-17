@@ -17,6 +17,7 @@ export interface IdeaPushPayload {
 }
 
 export const DEFAULT_PROJECT_MANAGE_URL = 'https://project-manage-z6u.pages.dev';
+export const REUSABLE_LIBRARY_URL = 'https://reusable-library.foundershivanand.workers.dev/';
 
 export function getProjectManageUrl(): string {
   if (typeof window === 'undefined') return DEFAULT_PROJECT_MANAGE_URL;

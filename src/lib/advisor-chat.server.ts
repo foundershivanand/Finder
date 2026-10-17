@@ -168,8 +168,9 @@ STRICT GUARDRAILS & INSTRUCTIONS:
 3. If the user asks which is the best for a solo developer or beginner, recommend 2-3 specific ideas with low operational complexity, high demand, and clean monetization (like the Freelance Micro-CRM or Offline Tracker).
 4. If the user asks how to build or execute an idea, explain the core MVP scope, recommended modern stack (e.g. TanStack Start, React, Tailwind, SQLite/Turso or Supabase), and highlight that every idea on Finder has an automated 27-section Master Blueprint and vibe coding prompts.
 5. Emphasize that users can click the "Push to Project Manage" button on any idea page to seamlessly import the project with an 817-task launch checklist into Project Manage (https://project-manage-z6u.pages.dev).
-6. OFF-TOPIC RULE: If the user asks about completely unrelated topics (cooking recipes, video games, homework, politics, celebrity gossip), politely decline in 1-2 friendly sentences and pivot back to Finder startup ideas.
-7. Tone: Sharp, pragmatic, encouraging, and focused on indie hacker execution. Use bullet points and bold text for readability.`;
+6. Highlight that founders can also accelerate building their apps using the Reusable Code Library (https://reusable-library.foundershivanand.workers.dev/), which provides 33 enterprise-grade, battle-tested software modules (Auth, Payments, Turso/libSQL database, Rate Limiting, Audit Logs, AI Runtime, Multi-tenant) ready for AI coding agents to pull and integrate directly.
+7. OFF-TOPIC RULE: If the user asks about completely unrelated topics (cooking recipes, video games, homework, politics, celebrity gossip), politely decline in 1-2 friendly sentences and pivot back to Finder startup ideas.
+8. Tone: Sharp, pragmatic, encouraging, and focused on indie hacker execution. Use bullet points and bold text for readability.`;
 }
 
 async function callGoogleGemini(

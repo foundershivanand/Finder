@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import {
   Bot,
+  Boxes,
   Check,
   ChevronDown,
   Compass,
@@ -29,6 +30,7 @@ const STARTER_PROMPTS = [
   "💰 What are the highest MRR SaaS to flank?",
   "📱 Best mobile app opportunities from 1-star reviews?",
   "🚀 How do I push an idea to Project Manage?",
+  "📦 What reusable modules can I pull from the Code Library?",
 ];
 
 export function FinderChatbot() {
@@ -205,6 +207,15 @@ export function FinderChatbot() {
                   <Trash2 className="size-3" />
                 </button>
               )}
+              <a
+                href="https://reusable-library.foundershivanand.workers.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-1 rounded-md text-zinc-500 hover:text-emerald-400 hover:bg-white/[0.04] transition-colors"
+                title="Open Reusable Code Library (33 modules)"
+              >
+                <Boxes className="size-3" />
+              </a>
               <button
                 type="button"
                 onClick={() => setIsMinimized((prev) => !prev)}

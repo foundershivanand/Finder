@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { ArrowRight, Compass, Download, Filter, Flame, Layers, Search, Sparkles, X } from "lucide-react";
+import { ArrowRight, Boxes, Compass, Download, ExternalLink, Filter, Flame, Layers, Search, Sparkles, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { AppFooter } from "@/components/app-footer";
 import { AppHeader } from "@/components/app-header";
@@ -345,11 +345,25 @@ function Hero({ desk, count }: { desk: DeskKind; count: number }) {
   const copy = heroCopy(desk, count);
   return (
     <section className="pt-6 sm:pt-10">
-      <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-[11px] font-mono tracking-wide bg-white/[0.03] text-zinc-400 border border-white/[0.06]">
-        <span className="size-1.5 rounded-full bg-emerald-400" />
-        <span className="text-zinc-200">{copy.kicker}</span>
-        <span className="text-zinc-600">•</span>
-        <span>{copy.badge}</span>
+      <div className="flex flex-wrap items-center gap-2">
+        <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-[11px] font-mono tracking-wide bg-white/[0.03] text-zinc-400 border border-white/[0.06]">
+          <span className="size-1.5 rounded-full bg-emerald-400" />
+          <span className="text-zinc-200">{copy.kicker}</span>
+          <span className="text-zinc-600">•</span>
+          <span>{copy.badge}</span>
+        </div>
+
+        <a
+          href="https://reusable-library.foundershivanand.workers.dev/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono tracking-wide bg-emerald-500/[0.05] hover:bg-emerald-500/[0.12] text-emerald-300 border border-emerald-500/20 transition-all group"
+          title="Personal Product Factory — 33 Reusable Code Modules ready for AI agents"
+        >
+          <Boxes className="size-3 text-emerald-400" />
+          <span>33 Reusable Modules</span>
+          <ExternalLink className="size-2.5 opacity-60 group-hover:opacity-100 transition-opacity" />
+        </a>
       </div>
 
       <h1 className="mt-3.5 max-w-3xl text-2xl sm:text-4xl lg:text-[42px] font-semibold tracking-tight text-white leading-[1.15]">

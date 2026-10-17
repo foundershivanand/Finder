@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Bookmark, Compass, Download, ExternalLink, FolderKanban, Sparkles, Trash2 } from "lucide-react";
+import { ArrowLeft, Bookmark, Boxes, Compass, Download, ExternalLink, FolderKanban, Sparkles, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AppFooter } from "@/components/app-footer";
 import { AppHeader } from "@/components/app-header";
@@ -75,21 +75,31 @@ function SavedPage() {
           ) : null}
         </div>
 
-        {/* Product Hub Companion Strip */}
-        <div className="mt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 p-3.5 rounded-xl border border-white/[0.07] bg-white/[0.02] text-xs">
-          <div className="flex items-center gap-2">
-            <FolderKanban className="size-3.5 text-emerald-400 shrink-0" />
-            <span className="text-zinc-300 text-xs">
-              Ready to execute? Track tasks and launch stages in{" "}
-              <strong className="text-white font-medium">Product Hub</strong> (817-task launch OS).
+        {/* Product Hub & Code Library Companion Strip */}
+        <div className="mt-5 flex flex-col md:flex-row md:items-center justify-between gap-3 p-3.5 rounded-xl border border-white/[0.07] bg-white/[0.02] text-xs">
+          <div className="flex items-center gap-2.5">
+            <FolderKanban className="size-4 text-emerald-400 shrink-0" />
+            <span className="text-zinc-300 text-xs leading-relaxed">
+              Ready to execute? Track tasks in{" "}
+              <strong className="text-white font-medium">Product Hub</strong> (817-task launch OS) or pull 33 production modules from{" "}
+              <strong className="text-white font-medium">Code Library</strong>.
             </span>
           </div>
-          <Button asChild size="sm" variant="outline" className="h-7 text-[11px] shrink-0 border-white/[0.08] bg-white/[0.03] text-zinc-300 hover:text-white hover:bg-white/[0.06]">
-            <a href="https://project-manage-z6u.pages.dev/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5">
-              <span>Open Product Hub</span>
-              <ExternalLink className="size-2.5 opacity-60" />
-            </a>
-          </Button>
+          <div className="flex items-center gap-2 shrink-0">
+            <Button asChild size="sm" variant="outline" className="h-7 text-[11px] border-white/[0.08] bg-white/[0.03] text-zinc-300 hover:text-white hover:bg-white/[0.06]">
+              <a href="https://project-manage-z6u.pages.dev/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5">
+                <span>Product Hub</span>
+                <ExternalLink className="size-2.5 opacity-60" />
+              </a>
+            </Button>
+            <Button asChild size="sm" variant="outline" className="h-7 text-[11px] border-white/[0.08] bg-white/[0.03] text-zinc-300 hover:text-white hover:bg-white/[0.06]">
+              <a href="https://reusable-library.foundershivanand.workers.dev/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5">
+                <Boxes className="size-3 text-emerald-400" />
+                <span>Code Library</span>
+                <ExternalLink className="size-2.5 opacity-60" />
+              </a>
+            </Button>
+          </div>
         </div>
 
         {items.length === 0 ? (
