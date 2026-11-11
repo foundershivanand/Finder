@@ -1,13 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Bookmark, BookmarkCheck, Check, Download, ExternalLink, FolderKanban, Layers, ListOrdered, LoaderCircle, RefreshCw, Sparkles } from "lucide-react";
+import { ArrowLeft, Bookmark, BookmarkCheck, Check, Download, ExternalLink, FolderKanban, Layers, LoaderCircle, RefreshCw, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AllLinksButton } from "@/components/all-links-button";
 import { useAllLinksModal } from "@/lib/all-links-store";
 import { AppFooter } from "@/components/app-footer";
 import { AppHeader } from "@/components/app-header";
-import { BriefView, CopyButton, PlanSections } from "@/components/brief-view";
+import { BriefView, PlanSections } from "@/components/brief-view";
 import { PlatformIcon } from "@/components/platform-icons";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatCount, formatGrowth, formatRating, formatUsd, initials, isDeskKind, isSafeHitId } from "@/lib/format";

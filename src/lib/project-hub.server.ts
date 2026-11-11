@@ -28,9 +28,8 @@ export interface PushToHubResult {
   error?: string;
 }
 
-const TURSO_PIPELINE_URL = "https://projectmanage-sh15a.aws-ap-south-1.turso.io/v2/pipeline";
-const TURSO_AUTH_TOKEN =
-  "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3ODk4ODMxMTUsImlkIjoiMDFhMGJkNTItY2YwMS03MDNhLTgwNTEtYTZhZTVkNGM2NjY3Iiwia2lkIjoiUEJVVXJDMUljTkFQVmc5WEwyNWlsa1Z1amVTUlFNM0Nqb202b0VvSHpNbyIsInJpZCI6IjY4MTg1NGY0LTZmOTktNDQzNS1hZGI5LTcwNDgyMDJjYjVlYSJ9.A1O5Bwuj3A_T7SvZvaYNv-Iem-iWq0v-GT7R49Rbldqvj0ID1qubk0wsAl1Yho_XI_BqbhuEOjUDZNl9SEdNDQ";
+const TURSO_PIPELINE_URL = process.env.TURSO_PIPELINE_URL || "https://projectmanage-sh15a.aws-ap-south-1.turso.io/v2/pipeline";
+const TURSO_AUTH_TOKEN = process.env.TURSO_AUTH_TOKEN || "";
 const PROJECT_MANAGE_BASE_URL = "https://project-manage-z6u.pages.dev";
 
 function slugify(text: string): string {
@@ -96,9 +95,10 @@ export async function pushIdeaToProjectHub(input: PushToHubInput): Promise<PushT
 
   const manageUrl = `${PROJECT_MANAGE_BASE_URL}/?${params.toString()}`;
 
-  // Execute Direct Database Sync to Turso (libSQL Pipeline HTTP API)
+  // Execute Direct Database Sync to Turso (libSQL Pipeline HTTP API) if configured
   let savedToTurso = false;
-  try {
+  if (TURSO_AUTH_TOKEN) {
+    try {
     const statements: Array<{ sql: string; args: TursoArg[] }> = [
       {
         sql: `INSERT INTO products (id, name, description, url, tag, status, sort_order, created_at, updated_at)
@@ -170,6 +170,7 @@ export async function pushIdeaToProjectHub(input: PushToHubInput): Promise<PushT
     }
   } catch (dbErr) {
     console.warn("[pushIdeaToProjectHub] Turso sync error:", dbErr);
+  }
   }
 
   return {

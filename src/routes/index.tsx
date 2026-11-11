@@ -1,13 +1,11 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { ArrowRight, Compass, Download, Filter, Flame, Layers, Search, Sparkles, X } from "lucide-react";
+import { ArrowRight, Filter, Search, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { AllLinksButton } from "@/components/all-links-button";
 import { AppFooter } from "@/components/app-footer";
 import { AppHeader } from "@/components/app-header";
 import { PlatformIcon } from "@/components/platform-icons";
 import { HitCard, ProductCard } from "@/components/product-card";
-import { PwaInstallButton, usePwaInstall } from "@/components/pwa-install";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -76,7 +74,6 @@ function Home() {
   const [deskError, setDeskError] = useState<Partial<Record<DeskKind, string>>>({});
   const [deskLoading, setDeskLoading] = useState<Partial<Record<DeskKind, boolean>>>({});
   const requested = useRef<Set<DeskKind>>(new Set());
-  const { isStandalone } = usePwaInstall();
 
   useEffect(() => {
     if (desk === "trustmrr") return;
@@ -99,7 +96,7 @@ function Home() {
   }, [desk]);
 
   const tmrrProducts = feed[tmrrTab];
-  const hits = deskHits[desk] ?? [];
+  const hits = useMemo(() => deskHits[desk] ?? [], [deskHits, desk]);
 
   const filteredTmrr = useMemo(() => {
     const q = query.trim().toLowerCase();

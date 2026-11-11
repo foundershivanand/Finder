@@ -67,7 +67,7 @@ async function assembleHit(kind: DeskKind, id: string): Promise<ProductDossier> 
 
 function parseHitInput(input: unknown): { kind: DeskKind; id: string } {
   const rec = typeof input === "object" && input ? (input as { kind?: unknown; id?: unknown; slug?: unknown }) : {};
-  let kind = typeof rec.kind === "string" ? rec.kind : "trustmrr";
+  const kind = typeof rec.kind === "string" ? (rec.kind as DeskKind) : "trustmrr";
   let id = typeof rec.id === "string" ? rec.id : typeof rec.slug === "string" ? rec.slug : "";
   if (kind === "trustmrr") id = id.toLowerCase();
   if (kind === "reddit") id = id.toLowerCase();
@@ -169,7 +169,7 @@ export const pushToProjectManage = createServerFn({ method: "POST" })
   });
 
 export const chatWithAdvisor = createServerFn({ method: "POST" })
-  .validator((input: unknown): { messages: ChatMessage[]; context?: CurrentIdeaContext } => {
+  .validator((input: unknown): { messages: ChatMessage[]; context?: CurrentIdeaContext; clientId: string } => {
     if (!input || typeof input !== "object") {
       throw new Error("Invalid payload");
     }
@@ -194,10 +194,12 @@ export const chatWithAdvisor = createServerFn({ method: "POST" })
         }
       : undefined;
 
-    return { messages, context };
+    const clientId = typeof r.clientId === "string" ? r.clientId.slice(0, 80) : "default";
+
+    return { messages, context, clientId };
   })
   .handler(async ({ data }): Promise<ChatAdvisorResult> => {
-    return askAdvisor(data.messages, data.context);
+    return askAdvisor(data.messages, data.context, data.clientId);
   });
 
 

@@ -1,0 +1,341 @@
+import { b as Link, w as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
+import { T as CircleCheck, g as Layers, o as Sparkles } from "../_libs/lucide-react.mjs";
+import { r as Button, t as AllLinksButton, u as useAllLinksModal } from "./app-header-D3EzbYIq.mjs";
+import { c as pushToProjectManage } from "./router-Sek10w9D.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/platform-icons-7XInBv_F.js
+var import_jsx_runtime = require_jsx_runtime();
+function AppFooter() {
+	const { open } = useAllLinksModal();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("footer", {
+		className: "mt-16 border-t border-white/[0.06] bg-background/50",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "mx-auto max-w-6xl px-4 py-10 sm:px-6",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "rounded-xl border border-white/[0.07] bg-white/[0.015] hover:bg-white/[0.025] p-5 sm:p-6 transition-all",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex flex-col lg:flex-row lg:items-center justify-between gap-5",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "max-w-2xl",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider uppercase text-zinc-400 bg-white/[0.03] border border-white/[0.06]",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Layers, { className: "size-3 text-emerald-400" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Product Factories & Ecosystem" })]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+								className: "mt-2 text-base sm:text-lg font-semibold tracking-tight text-white",
+								children: "5 Product Factories & Launch Operating Systems"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "mt-1 text-xs text-zinc-400 leading-relaxed",
+								children: "Connect your ideas directly to our full suite: Product Hub (817 launch tasks), Bots Product Factory, AI Agent Factory, Mobile Factory, and the Reusable Code Library."
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "mt-3 flex flex-wrap items-center gap-2 text-[10px] font-mono text-zinc-500",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/[0.02] border border-white/[0.05]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, { className: "size-2.5 text-emerald-400" }), " 5 Live Hubs"]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/[0.02] border border-white/[0.05]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { className: "size-2.5 text-emerald-400" }), " 196+ Total Modules"]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/[0.02] border border-white/[0.05]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Layers, { className: "size-2.5 text-emerald-400" }), " One-Click Access"]
+									})
+								]
+							})
+						]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "flex items-center gap-3 shrink-0",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+							type: "button",
+							onClick: open,
+							className: "h-9 px-4 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 font-medium text-xs shadow-sm cursor-pointer",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Layers, { className: "size-3.5 mr-1.5 text-zinc-950" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "All Links (5 Hubs)" })]
+						})
+					})]
+				})
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-white/[0.05] pt-5 text-xs text-zinc-500",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-2",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "font-medium text-zinc-400",
+							children: "Finder"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "text-zinc-700",
+							children: "•"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "text-[11px]",
+							children: "Real-Time Startup Intelligence"
+						})
+					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-4 text-xs",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+							to: "/",
+							className: "text-zinc-400 hover:text-white transition-colors",
+							children: "Discover"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+							to: "/saved",
+							className: "text-zinc-400 hover:text-white transition-colors",
+							children: "Saved"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AllLinksButton, {
+							variant: "subtle",
+							label: "All Links"
+						})
+					]
+				})]
+			})]
+		})
+	});
+}
+var DEFAULT_PROJECT_MANAGE_URL = "https://project-manage-z6u.pages.dev";
+function getProjectManageUrl() {
+	if (typeof window === "undefined") return DEFAULT_PROJECT_MANAGE_URL;
+	const stored = localStorage.getItem("project_manage_url");
+	if (stored) return stored.trim();
+	if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") return "http://localhost:5173";
+	return DEFAULT_PROJECT_MANAGE_URL;
+}
+function mapOpportunityTag(kind, category) {
+	const c = (category || "").toLowerCase();
+	const k = (kind || "").toLowerCase();
+	if (k === "appstore" || k === "playstore" || c.includes("ios") || c.includes("android") || c.includes("mobile")) return "app";
+	if (c.includes("game") || c.includes("gaming")) return "games";
+	if (c.includes("saas") || c.includes("b2b") || c.includes("subscription") || c.includes("crm") || c.includes("analytics") || c.includes("ecommerce") || c.includes("store") || c.includes("shop") || c.includes("commerce")) return "saas";
+	if (c.includes("tool") || c.includes("developer") || c.includes("utility") || c.includes("extension") || c.includes("addon") || c.includes("plugin") || k === "firefox" || k === "github" || c.includes("ai") || c.includes("llm") || c.includes("gpt")) return "tool";
+	return "web-app";
+}
+function slugify(text) {
+	return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "").slice(0, 40);
+}
+function pushIdeaToProjectManage(payload) {
+	if (typeof window === "undefined") return;
+	const productId = `finder-${slugify(payload.name) || Date.now()}`;
+	const validTag = mapOpportunityTag(payload.tag || "", payload.source || "");
+	pushToProjectManage({ data: {
+		id: productId,
+		name: payload.name,
+		description: payload.description,
+		url: payload.url,
+		tag: validTag,
+		source: payload.source,
+		sourceUrl: payload.sourceUrl,
+		blueprint: payload.blueprint,
+		vibeGuide: payload.vibeGuide
+	} }).catch((err) => {
+		console.warn("Direct Turso sync warning:", err);
+	});
+	const baseUrl = getProjectManageUrl();
+	const target = new URL(baseUrl);
+	target.searchParams.set("action", "import-idea");
+	target.searchParams.set("id", productId);
+	target.searchParams.set("name", payload.name);
+	if (payload.description) target.searchParams.set("desc", payload.description.slice(0, 400));
+	if (payload.url) target.searchParams.set("url", payload.url);
+	target.searchParams.set("tag", validTag);
+	target.searchParams.set("status", payload.status || "idea");
+	if (payload.source) target.searchParams.set("source", payload.source);
+	if (payload.sourceUrl) target.searchParams.set("sourceUrl", payload.sourceUrl);
+	const compactPayload = {
+		id: productId,
+		name: payload.name,
+		description: (payload.description || "").slice(0, 400),
+		url: payload.url,
+		tag: validTag,
+		status: payload.status || "idea",
+		source: payload.source || "Finder",
+		sourceUrl: payload.sourceUrl,
+		vibeGuide: payload.vibeGuide?.slice(0, 10).map((s) => ({
+			step: s.step,
+			title: s.title.slice(0, 100),
+			why: (s.why || "").slice(0, 150),
+			prompt: (s.prompt || "").slice(0, 300),
+			doneWhen: (s.doneWhen || "").slice(0, 100)
+		}))
+	};
+	target.searchParams.set("import_idea", JSON.stringify(compactPayload));
+	window.open(target.toString(), "_blank", "noopener,noreferrer");
+}
+function PlatformIcon({ kind, className = "size-4" }) {
+	switch (kind) {
+		case "reddit": return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+			className,
+			viewBox: "0 0 24 24",
+			fill: "currentColor",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", {
+				cx: "12",
+				cy: "12",
+				r: "12",
+				fill: "#FF4500"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#FFF",
+				d: "M19.4 12.8c0-.7-.5-1.2-1.2-1.2-.4 0-.7.2-.9.5-1.1-.7-2.6-1.1-4.2-1.2l.7-3.4 2.4.5c0 .6.5 1 1.1 1 .6 0 1.1-.5 1.1-1.1s-.5-1.1-1.1-1.1c-.5 0-.9.3-1 .8l-2.7-.6c-.2 0-.4.1-.4.3l-.9 4c-1.7 0-3.2.5-4.3 1.2-.2-.3-.5-.5-.9-.5-.7 0-1.2.5-1.2 1.2 0 .5.3.9.7 1.1-.1.3-.1.6-.1.9 0 2.4 2.7 4.3 6 4.3s6-1.9 6-4.3c0-.3 0-.6-.1-.9.4-.2.7-.6.7-1.1zm-8.9.5c.5 0 .9.4.9.9s-.4.9-.9.9-.9-.4-.9-.9.4-.9.9-.9zm5 3.5c-.7.7-2 1-3.5 1s-2.8-.3-3.5-1c-.1-.1-.1-.3 0-.4.1-.1.3-.1.4 0 .5.5 1.6.8 3.1.8s2.5-.3 3.1-.8c.1-.1.3-.1.4 0 .1.1.1.3 0 .4zm-.1-2.6c-.5 0-.9-.4-.9-.9s.4-.9.9-.9.9.4.9.9-.4.9-.9.9z"
+			})]
+		});
+		case "producthunt": return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+			className,
+			viewBox: "0 0 24 24",
+			fill: "currentColor",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", {
+				cx: "12",
+				cy: "12",
+				r: "12",
+				fill: "#FF6154"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#FFF",
+				d: "M13.6 11.2h-2.8v-2.4h2.8c.7 0 1.2.5 1.2 1.2 0 .7-.5 1.2-1.2 1.2zm0-4.4H8.8v10.4h2v-4h2.8c1.8 0 3.2-1.4 3.2-3.2 0-1.8-1.4-3.2-3.2-3.2z"
+			})]
+		});
+		case "appstore": return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+			className,
+			viewBox: "0 0 24 24",
+			fill: "currentColor",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", {
+				cx: "12",
+				cy: "12",
+				r: "12",
+				fill: "#0071E3"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#FFF",
+				d: "M15.2 13.5l1.6 2.7c.3.5.1 1.2-.4 1.5-.2.1-.5.2-.7.2-.3 0-.7-.2-.9-.5l-1.3-2.3-3.9 2.3c-.2.1-.5.2-.7.2-.3 0-.7-.2-.9-.5-.3-.5-.1-1.2.4-1.5l1.9-1.1-2.9-5.1c-.3-.5-.1-1.2.4-1.5.5-.3 1.2-.1 1.5.4l1.3 2.3 2.1-1.2c.5-.3 1.2-.1 1.5.4.3.5.1 1.2-.4 1.5l-1.6.9 1.4 2.4zm-2.7-4.7l-1.2-2.1c-.3-.5-1-.7-1.5-.4-.5.3-.7 1-.4 1.5l1.2 2.1 1.9-1.1z"
+			})]
+		});
+		case "playstore": return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+			className,
+			viewBox: "0 0 24 24",
+			fill: "none",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", {
+					cx: "12",
+					cy: "12",
+					r: "12",
+					fill: "#1e293b"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+					d: "M6.5 5.2v13.6c0 .5.3.9.7 1.1l7.8-7.9L7.2 4.1c-.4.2-.7.6-.7 1.1z",
+					fill: "#00E676"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+					d: "M17.8 10.6l-2.8-1.6-2.5 2.5 2.5 2.5 2.8-1.6c.8-.5.8-1.3 0-1.8z",
+					fill: "#FFD600"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+					d: "M7.2 4.1l7.8 7.9-2.5 2.5-5.3-5.3V5.2c0-.4.2-.8.5-1.1z",
+					fill: "#00B0FF"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+					d: "M15 15.5l-7.8 7.9c-.3-.3-.5-.7-.5-1.1v-4l5.3-5.3 3 2.5z",
+					fill: "#FF3D00"
+				})
+			]
+		});
+		case "trustmrr": return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+			className,
+			viewBox: "0 0 24 24",
+			fill: "none",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", {
+				cx: "12",
+				cy: "12",
+				r: "12",
+				fill: "#047857"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				d: "M12 6v12m-3-9.5c.6-.6 1.8-1 3-1 2.2 0 3.5 1.1 3.5 2.5 0 2.8-6.5 1.7-6.5 4.5 0 1.4 1.3 2.5 3.5 2.5 1.2 0 2.4-.4 3-1",
+				stroke: "#FFF",
+				strokeWidth: "2",
+				strokeLinecap: "round"
+			})]
+		});
+		case "twitter": return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+			className,
+			viewBox: "0 0 24 24",
+			fill: "currentColor",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", {
+				cx: "12",
+				cy: "12",
+				r: "12",
+				fill: "#000"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#FFF",
+				d: "M14.2 11.2l4.8-5.6h-1.1l-4.2 4.9-3.3-4.9H7l5 7.3-5 5.8h1.1l4.4-5.1 3.5 5.1h3.5l-5.3-7.5zm-1.6 1.8l-.5-.7-4-5.7h1.8l3.2 4.6.5.7 4.2 6h-1.8l-3.4-4.9z"
+			})]
+		});
+		case "hackernews": return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+			className,
+			viewBox: "0 0 24 24",
+			fill: "currentColor",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", {
+				width: "24",
+				height: "24",
+				rx: "12",
+				fill: "#FF6600"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", {
+				x: "12",
+				y: "17",
+				textAnchor: "middle",
+				fill: "#FFF",
+				fontWeight: "bold",
+				fontSize: "14",
+				fontFamily: "monospace",
+				children: "Y"
+			})]
+		});
+		case "github": return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+			className,
+			viewBox: "0 0 24 24",
+			fill: "currentColor",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", {
+				cx: "12",
+				cy: "12",
+				r: "12",
+				fill: "#24292e"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#FFF",
+				d: "M12 4a8 8 0 0 0-2.5 15.6c.4.1.5-.2.5-.4v-1.4c-2.2.5-2.7-1.1-2.7-1.1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.2 1.9.9 2.4.7.1-.5.3-.9.5-1.1-1.8-.2-3.7-.9-3.7-4a3.1 3.1 0 0 1 .8-2.2c-.1-.2-.4-1 .1-2.2 0 0 .7-.2 2.3.9a8 8 0 0 1 4.2 0c1.6-1.1 2.3-.9 2.3-.9.5 1.2.2 2 .1 2.2.6.7.8 1.4.8 2.2 0 3.1-1.9 3.8-3.7 4 .3.3.6.8.6 1.6v2.4c0 .2.1.5.5.4A8 8 0 0 0 12 4z"
+			})]
+		});
+		case "betalist": return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+			className,
+			viewBox: "0 0 24 24",
+			fill: "currentColor",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", {
+				cx: "12",
+				cy: "12",
+				r: "12",
+				fill: "#3B82F6"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", {
+				x: "12",
+				y: "17",
+				textAnchor: "middle",
+				fill: "#FFF",
+				fontWeight: "bold",
+				fontSize: "13",
+				fontFamily: "sans-serif",
+				children: "β"
+			})]
+		});
+		default: return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+			className,
+			viewBox: "0 0 24 24",
+			fill: "none",
+			stroke: "currentColor",
+			strokeWidth: "2",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", {
+				cx: "12",
+				cy: "12",
+				r: "10"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M12 16v-4M12 8h.01" })]
+		});
+	}
+}
+//#endregion
+export { pushIdeaToProjectManage as i, PlatformIcon as n, mapOpportunityTag as r, AppFooter as t };

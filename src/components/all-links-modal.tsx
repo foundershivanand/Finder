@@ -4,7 +4,6 @@ import {
   Bot,
   Boxes,
   Cpu,
-  ExternalLink,
   FolderKanban,
   Layers,
   Smartphone,
@@ -15,7 +14,6 @@ import {
 import { ALL_ECOSYSTEM_LINKS, type EcosystemLinkItem } from "@/lib/all-links-data";
 import { useAllLinksModal } from "@/lib/all-links-store";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 function renderLinkIcon(name: EcosystemLinkItem["iconName"]) {
   switch (name) {

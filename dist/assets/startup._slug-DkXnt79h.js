@@ -1,0 +1,1 @@
+import{s as e}from"./link-Cy4_nfhh.js";import{c as t,n}from"./index-Dn7x8HgC.js";var r=e();function i(){let{slug:e}=n.useParams();return(0,r.jsx)(t,{to:`/hit/$kind/$id`,params:{kind:`trustmrr`,id:e},replace:!0})}export{i as component};

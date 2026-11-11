@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, CheckCircle2, Layers, Sparkles } from "lucide-react";
+import { CheckCircle2, Layers, Sparkles } from "lucide-react";
 import { AllLinksButton } from "@/components/all-links-button";
 import { Button } from "@/components/ui/button";
 import { useAllLinksModal } from "@/lib/all-links-store";

@@ -1,8 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Check, FolderKanban, Sparkles, Star, TrendingUp } from "lucide-react";
+import { ArrowUpRight, Check, FolderKanban } from "lucide-react";
 import { useState } from "react";
 import { PlatformIcon } from "@/components/platform-icons";
-import { Badge } from "@/components/ui/badge";
 import { formatGrowth, formatUsd, initials } from "@/lib/format";
 import { pushIdeaToProjectManage, mapOpportunityTag } from "@/lib/project-manage";
 import type { ScoutHit, ScoutProduct } from "@/lib/types";
@@ -38,7 +37,7 @@ export function ProductCard({ product }: { product: ScoutProduct }) {
   );
 }
 
-export function HitCard({ hit, moneyTone }: { hit: ScoutHit; moneyTone?: boolean }) {
+export function HitCard({ hit, moneyTone: _moneyTone }: { hit: ScoutHit; moneyTone?: boolean }) {
   const [broken, setBroken] = useState(false);
   const [pushed, setPushed] = useState(false);
 

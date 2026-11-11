@@ -1,8 +1,8 @@
-import { loadScoutFeed } from "./trustmrr.server";
-import { loadRedditFeed } from "./reddit.server";
-import { loadAppStoreFeed } from "./appstore.server";
-import { loadPlayStoreFeed } from "./playstore.server";
-import type { DeskKind, ScoutHit, ScoutProduct } from "./types";
+import { loadScoutFeed } from "./trustmrr.server.ts";
+import { loadRedditFeed } from "./reddit.server.ts";
+import { loadAppStoreFeed } from "./appstore.server.ts";
+import { loadPlayStoreFeed } from "./playstore.server.ts";
+import type { ScoutHit } from "./types.ts";
 
 export interface ChatMessage {
   role: "system" | "user" | "assistant";
@@ -25,12 +25,6 @@ export interface ChatAdvisorResult {
   reply: string;
   suggestions: string[];
 }
-
-const GEMINI_DEFAULT_KEY =
-  "AQ.Ab8RN6LAfvTPYRY4M327Eq9_I4KECJpIDIIcoIGgnhS1ikHA6w";
-const GEMINI_PROJECT_ID = "353088419729";
-const OPENROUTER_DEFAULT_KEY =
-  "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";
 
 let catalogSummaryCache: { at: number; summary: string } | null = null;
 const CATALOG_TTL = 15 * 60_000;
@@ -258,14 +252,60 @@ async function callGoogleGemini(
   return null;
 }
 
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const MAX_REQUESTS_PER_WINDOW = 25;
+
+interface RateLimitRecord {
+  timestamps: number[];
+}
+
+const clientRateLimitMap = new Map<string, RateLimitRecord>();
+
+export function checkAdvisorRateLimit(clientId = "default"): { allowed: boolean; retryAfterSeconds?: number } {
+  const now = Date.now();
+  let record = clientRateLimitMap.get(clientId);
+  if (!record) {
+    record = { timestamps: [] };
+    clientRateLimitMap.set(clientId, record);
+  }
+
+  record.timestamps = record.timestamps.filter((ts) => now - ts < RATE_LIMIT_WINDOW_MS);
+
+  if (record.timestamps.length >= MAX_REQUESTS_PER_WINDOW) {
+    const oldest = record.timestamps[0] || now;
+    const retryAfter = Math.ceil((oldest + RATE_LIMIT_WINDOW_MS - now) / 1000);
+    return { allowed: false, retryAfterSeconds: Math.max(1, retryAfter) };
+  }
+
+  record.timestamps.push(now);
+  return { allowed: true };
+}
+
+export function resetAdvisorRateLimits(): void {
+  clientRateLimitMap.clear();
+}
+
 export async function askAdvisor(
   messages: ChatMessage[],
-  context?: CurrentIdeaContext
+  context?: CurrentIdeaContext,
+  clientId = "default"
 ): Promise<ChatAdvisorResult> {
+  const limitCheck = checkAdvisorRateLimit(clientId);
+  if (!limitCheck.allowed) {
+    return {
+      ok: false,
+      reply: `⚠️ You are sending requests too quickly. Please wait ${limitCheck.retryAfterSeconds}s before asking again.`,
+      suggestions: [
+        "Wait a moment and try again",
+        "Browse saved ideas",
+        "Explore TrustMRR startups",
+      ],
+    };
+  }
   const catalog = await getFinderCatalogSummary();
   const systemPrompt = buildSystemPrompt(catalog, context);
 
-  const geminiKey = process.env.GEMINI_API_KEY || GEMINI_DEFAULT_KEY;
+  const geminiKey = process.env.GEMINI_API_KEY || "";
 
   // 1. Try Google Gemini API directly using user-provided key
   if (geminiKey) {
@@ -280,8 +320,7 @@ export async function askAdvisor(
   }
 
   // 2. Failover to OpenRouter if Gemini API is unreachable
-  const openRouterKey =
-    process.env.OPENROUTER_API_KEY || OPENROUTER_DEFAULT_KEY;
+  const openRouterKey = process.env.OPENROUTER_API_KEY || "";
 
   const apiMessages = [
     { role: "system", content: systemPrompt },
@@ -345,7 +384,7 @@ export async function askAdvisor(
   };
 }
 
-function generateContextualSuggestions(reply: string, context?: CurrentIdeaContext): string[] {
+export function generateContextualSuggestions(reply: string, context?: CurrentIdeaContext): string[] {
   const suggestions: string[] = [];
   const lower = reply.toLowerCase();
 
@@ -373,7 +412,7 @@ function generateContextualSuggestions(reply: string, context?: CurrentIdeaConte
   return Array.from(new Set(suggestions)).slice(0, 3);
 }
 
-function generateLocalAdvisorResponse(query: string, context?: CurrentIdeaContext): string {
+export function generateLocalAdvisorResponse(query: string, context?: CurrentIdeaContext): string {
   const q = query.toLowerCase();
 
   if (context?.name) {

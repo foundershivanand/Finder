@@ -1,7 +1,7 @@
-import { formatCount, formatRating } from "./format";
-import { fetchJson, readCache, stripHtml, writeCache } from "./http.server";
-import { emptyTarget } from "./profile";
-import type { ReviewSnippet, ScoutHit, TargetProfile } from "./types";
+import { formatCount, formatRating } from "./format.ts";
+import { fetchJson, readCache, stripHtml, writeCache } from "./http.server.ts";
+import { emptyTarget } from "./profile.ts";
+import type { ReviewSnippet, ScoutHit, TargetProfile } from "./types.ts";
 
 type IosApp = {
   id: string;
@@ -189,7 +189,7 @@ function parseReviews(json: unknown, appId: string): ReviewSnippet[] {
     if (body.length < 24) continue;
     const author = label((rec.author as Record<string, unknown> | undefined)?.name) || "App Store";
     out.push({
-      source: `App Store · ${rating}★`,
+      source: author !== "App Store" ? `App Store (${author}) · ${rating}★` : `App Store · ${rating}★`,
       title,
       url: `https://apps.apple.com/us/app/id${appId}`,
       body: `${title}. ${body}`.slice(0, 420),

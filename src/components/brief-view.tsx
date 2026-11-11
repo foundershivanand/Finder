@@ -1,4 +1,4 @@
-import { Check, Copy, Download, ExternalLink, FileCode, FolderKanban, Layers, ShieldCheck, Sparkles, Terminal } from "lucide-react";
+import { Check, Copy, Download, ExternalLink, FolderKanban, Layers, Sparkles, Terminal } from "lucide-react";
 import { useState } from "react";
 import { AllLinksButton } from "@/components/all-links-button";
 import { Badge } from "@/components/ui/badge";
@@ -19,8 +19,6 @@ export function BriefView({
   kind?: DeskKind;
 }) {
   const isAskDesk = kind === "reddit" || kind === "twitter" || kind === "hackernews";
-  const isStore = kind === "appstore" || kind === "playstore";
-  const [pushed, setPushed] = useState(false);
 
   return (
     <div className="flex flex-col gap-10">
@@ -54,8 +52,8 @@ export function BriefView({
             <span className="text-xs font-mono text-faint">{reviews.length} mined signals</span>
           </div>
           <ul className="mt-4 flex flex-col gap-2.5">
-            {reviews.slice(0, 6).map((r) => (
-              <li key={r.url + r.body.slice(0, 24)} className="rounded-xl bg-card/80 border border-border/70 p-4 transition-colors hover:border-border">
+            {reviews.slice(0, 6).map((r, idx) => (
+              <li key={`${r.url}-${idx}-${r.body.slice(0, 24)}`} className="rounded-xl bg-card/80 border border-border/70 p-4 transition-colors hover:border-border">
                 <p className="text-[10px] uppercase font-mono tracking-wider text-faint">
                   {r.source} {r.title ? `• ${r.title}` : ""}
                 </p>
@@ -80,8 +78,8 @@ export function BriefView({
             : "Direct quotes from store reviews and user grievances. Build the antidote that fixes them on day 1."}
         </p>
         <ol className="mt-4 flex flex-col gap-3">
-          {brief.complaints.map((c) => (
-            <ComplaintCard key={c.theme} complaint={c} />
+          {brief.complaints.map((c, idx) => (
+            <ComplaintCard key={`${c.theme}-${idx}`} complaint={c} />
           ))}
         </ol>
       </section>
@@ -92,9 +90,9 @@ export function BriefView({
           <Kicker>Market White Space</Kicker>
           <h2 className="mt-1 text-xl sm:text-2xl font-bold text-foreground">Gaps left wide open</h2>
           <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
-            {brief.gaps.map((gap) => (
+            {brief.gaps.map((gap, idx) => (
               <li
-                key={gap}
+                key={`${gap}-${idx}`}
                 className="rounded-xl bg-card border border-border/70 p-3.5 text-xs sm:text-sm leading-relaxed text-foreground"
               >
                 <div className="flex items-start gap-2">
@@ -205,8 +203,8 @@ export function PlanSections({ brief }: { brief: RiposteBrief }) {
           <p className="mt-2 text-sm font-semibold text-foreground">{brief.stack.recommendation}</p>
           <p className="mt-1.5 text-xs leading-relaxed text-muted">{brief.stack.reason}</p>
           <div className="mt-3 flex flex-wrap gap-1.5">
-            {brief.stack.pieces.map((p) => (
-              <Badge key={p} variant="outline" className="text-[10px] py-0 px-2 font-mono">
+            {brief.stack.pieces.map((p, idx) => (
+              <Badge key={`${p}-${idx}`} variant="outline" className="text-[10px] py-0 px-2 font-mono">
                 {p}
               </Badge>
             ))}
@@ -219,8 +217,8 @@ export function PlanSections({ brief }: { brief: RiposteBrief }) {
             <Kicker>MVP Scope (Ship Fast)</Kicker>
           </div>
           <ul className="mt-3 space-y-2 text-xs leading-relaxed text-foreground">
-            {brief.mvpScope.map((item) => (
-              <li key={item} className="flex items-start gap-1.5">
+            {brief.mvpScope.map((item, idx) => (
+              <li key={`${item}-${idx}`} className="flex items-start gap-1.5">
                 <span className="text-emerald-400 font-bold shrink-0">•</span>
                 <span>{item}</span>
               </li>
@@ -234,8 +232,8 @@ export function PlanSections({ brief }: { brief: RiposteBrief }) {
             <Kicker>Out of Scope (Post-MVP)</Kicker>
           </div>
           <ul className="mt-3 space-y-2 text-xs leading-relaxed text-muted">
-            {brief.outOfScope.map((item) => (
-              <li key={item} className="flex items-start gap-1.5">
+            {brief.outOfScope.map((item, idx) => (
+              <li key={`${item}-${idx}`} className="flex items-start gap-1.5">
                 <span className="text-faint font-bold shrink-0">•</span>
                 <span>{item}</span>
               </li>

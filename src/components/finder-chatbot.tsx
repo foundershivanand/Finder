@@ -2,21 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import {
   Bot,
-  Boxes,
-  Check,
-  ChevronDown,
   Compass,
   CornerDownLeft,
   ExternalLink,
-  FolderKanban,
   Layers,
   Maximize2,
   Minimize2,
-  RefreshCw,
   Send,
   Sparkles,
   Trash2,
-  User,
   X,
 } from "lucide-react";
 import { chatWithAdvisor } from "@/lib/server-fns";
@@ -447,7 +441,7 @@ function ChatMessageContent({
         }
 
         // Numbered item
-        const numMatch = trimmed.match(/^(\d+)[\.\)]\s+(.*)$/);
+        const numMatch = trimmed.match(/^(\d+)[.)]\s+(.*)$/);
         if (numMatch) {
           return (
             <div key={lineIdx} className="flex items-start gap-1.5 pl-1 my-1">

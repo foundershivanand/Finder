@@ -1,7 +1,7 @@
-import { formatRating } from "./format";
-import { BROWSER_UA, decodeEntities, fetchText, readCache, stripHtml, writeCache } from "./http.server";
-import { emptyTarget } from "./profile";
-import type { ReviewSnippet, ScoutHit, TargetProfile } from "./types";
+import { formatRating } from "./format.ts";
+import { BROWSER_UA, decodeEntities, fetchText, readCache, stripHtml, writeCache } from "./http.server.ts";
+import { emptyTarget } from "./profile.ts";
+import type { ReviewSnippet, ScoutHit, TargetProfile } from "./types.ts";
 
 type PlayApp = {
   id: string;

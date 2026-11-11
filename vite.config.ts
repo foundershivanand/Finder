@@ -150,6 +150,10 @@ export default defineConfig(({ command, isPreview }) => ({
     host: "0.0.0.0",
     port: 8080,
     strictPort: true,
+    watch: {
+      usePolling: process.env.CHOKIDAR_USEPOLLING === "1" || process.env.CI === "true",
+      ignored: ["**/dist/**", "**/.vercel/**", "**/.wrangler/**", "**/Finder/**", "**/screenshots/**", "**/docs/**"],
+    },
   },
   preview: {
     host: "127.0.0.1",

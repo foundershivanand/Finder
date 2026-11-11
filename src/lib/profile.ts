@@ -1,5 +1,5 @@
-import { ZERO_REVENUE } from "./http.server";
-import type { StartupProfile, TargetProfile } from "./types";
+import { ZERO_REVENUE } from "./http.server.ts";
+import type { StartupProfile, TargetProfile } from "./types.ts";
 
 export function emptyTarget(partial: Partial<TargetProfile> & Pick<TargetProfile, "kind" | "id" | "name">): TargetProfile {
   return {

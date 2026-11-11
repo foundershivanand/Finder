@@ -7,9 +7,9 @@
       "status": 200,
       "title": "Finder — Startup & App Ideas",
       "hasCanvas": false,
-      "bodyTextLen": 11053,
-      "bodyTextHash": "11ccc4380530cb0745e7364590d40e63333e836d02c8b992600c43fb1a186b66",
-      "bodyTextPrefix": "Finder Discover Saved Plans Install App PWA TRUSTMRR DESK Live f",
+      "bodyTextLen": 11366,
+      "bodyTextHash": "bf1d40765841a5f50555553e4c4833ed8c2500f0432af3fe6f4663289f0ac041",
+      "bodyTextPrefix": "Finder Discover Saved All Links 6 Install App PWA TrustMRR Desk ",
       "horizontalOverflow": false,
       "consoleErrors": [],
       "pageErrors": [],
@@ -21,9 +21,9 @@
       "status": 200,
       "title": "Finder — Startup & App Ideas",
       "hasCanvas": false,
-      "bodyTextLen": 10322,
-      "bodyTextHash": "d103ab7d08e5c4e68f404b036cfdb84b8fc8f6339fcfaab37936740312e135ba",
-      "bodyTextPrefix": "Finder Saved Plans Install App TRUSTMRR DESK Live from TrustMRR ",
+      "bodyTextLen": 10703,
+      "bodyTextHash": "da112b9cc4659b36db4680113a24b0767eeeed64452020545c6b692c3f897d3e",
+      "bodyTextPrefix": "Finder Saved All Links 6 Install App TrustMRR Desk • 51 earning ",
       "horizontalOverflow": false,
       "consoleErrors": [],
       "pageErrors": [],
@@ -35,6 +35,8 @@
   ],
   "authWarnings": [],
   "verdictFile": "/home/shiva/finder/screenshots/app-builder-built.json",
-  "divergesFromBaseline": false,
-  "baselineReasons": []
+  "divergesFromBaseline": true,
+  "baselineReasons": [
+    "mobile: body text replaced (similar length, page start changed)"
+  ]
 }
