@@ -105,7 +105,7 @@ var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 * the dev styles URL for route-scoped CSS collection.
 */
 async function getStartManifest(matchedRoutes) {
-	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-D7E28rWx.mjs");
+	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-CM5RAKnB.mjs");
 	const startManifest = tsrStartManifest();
 	let routes = startManifest.routes;
 	routes[rootRouteId];
@@ -127,31 +127,31 @@ async function getStartManifest(matchedRoutes) {
 var manifest = {
 	"0094828dcb2d3ee625931b762888f74875e8a91a4dcfad61fe0f7d8106cab7e4": {
 		functionName: "fetchProfile_createServerFn_handler",
-		importer: () => import("./server-fns-Cr2VIln0.mjs")
+		importer: () => import("./server-fns-ts-hMOWc.mjs")
 	},
 	"04c3d6d0e10a09784b571ed427a9ff5e9fe34eb18f0015626b26d47ba3da9e5f": {
 		functionName: "fetchDesk_createServerFn_handler",
-		importer: () => import("./server-fns-Cr2VIln0.mjs")
+		importer: () => import("./server-fns-ts-hMOWc.mjs")
 	},
 	"3097d0316f7f278096020ff21dee3db5372981bf5913b8d0a66b2241d63ad424": {
 		functionName: "generateBrief_createServerFn_handler",
-		importer: () => import("./server-fns-Cr2VIln0.mjs")
+		importer: () => import("./server-fns-ts-hMOWc.mjs")
 	},
 	"c3da6dc01513fbf2f7e0ffc1a64e27d96827fd8ba06c83a484fada19274db2b3": {
 		functionName: "chatWithAdvisor_createServerFn_handler",
-		importer: () => import("./server-fns-Cr2VIln0.mjs")
+		importer: () => import("./server-fns-ts-hMOWc.mjs")
 	},
 	"cf28209a589924822e2f467e20e24f6a7e304342c4166e7aa01e4bebfb66e0a1": {
 		functionName: "fetchDossier_createServerFn_handler",
-		importer: () => import("./server-fns-Cr2VIln0.mjs")
+		importer: () => import("./server-fns-ts-hMOWc.mjs")
 	},
 	"f7405e2bc1a43414ae7efec36dc3dd0ede3fd1c6cff92ba0376614bc5b55ceab": {
 		functionName: "fetchScout_createServerFn_handler",
-		importer: () => import("./server-fns-Cr2VIln0.mjs")
+		importer: () => import("./server-fns-ts-hMOWc.mjs")
 	},
 	"f9f6f1020f739df08e8d0144ce0f575c99d7e08a3509f86fce216fd589295b71": {
 		functionName: "pushToProjectManage_createServerFn_handler",
-		importer: () => import("./server-fns-Cr2VIln0.mjs")
+		importer: () => import("./server-fns-ts-hMOWc.mjs")
 	}
 };
 async function getServerFnById(id, access) {
@@ -1556,7 +1556,7 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
 	const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-		import("./router-CJGTls8J.mjs").then((n) => n.t),
+		import("./router-U3isjXly.mjs").then((n) => n.t),
 		import("./start-5Z2QO8AU.mjs"),
 		import("./empty-plugin-adapters-D9UWiqvJ.mjs")
 	]);

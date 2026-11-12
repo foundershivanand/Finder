@@ -1,7 +1,7 @@
 {
-  "compatibility_date": "2026-10-17",
+  "compatibility_date": "2026-11-12",
   "pages_build_output_dir": "..",
-  "name": "sh15aa-finder",
+  "name": "foundershivanand-finder",
   "compatibility_flags": [
     "nodejs_compat"
   ]
